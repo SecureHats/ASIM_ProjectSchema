@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "Workspace": {
+      "type": "string",
+      "metadata": {
+        "description": "The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group."
+      }
+    },
+    "WorkspaceRegion": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The region of the selected workspace. The default value will use the Region selection above."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces",
+      "apiVersion": "2017-03-15-preview",
+      "name": "[parameters('Workspace')]",
+      "location": "[parameters('WorkspaceRegion')]",
+      "resources": [
+        {
+          "type": "savedSearches",
+          "apiVersion": "2020-08-01",
+          "name": "ASIM_Project",
+          "dependsOn": [
+            "[concat('Microsoft.OperationalInsights/workspaces/', parameters('Workspace'))]"
+          ],
+          "properties": {
+            "etag": "*",
+            "displayName": "Project Helper",
+            "category": "ASIM",
+            "FunctionAlias": "ASIM_Project",
+            "query": "let NetworkSession =\nT\n| where EventSchema == 'NetworkSession'\n| invoke ASIM_ProjectNetworkSessionSchema()\n;\nlet Authentication =\nT\n| where EventSchema == 'Authentication'\n| invoke ASIM_ProjectAuthenticationSchema()\n;\nunion isfuzzy = false NetworkSession, Authentication",
+            "version": 1,
+            "functionParameters": "T:(TimeGenerated:datetime), EventSchema:string='*'"
+          }
+        }
+      ]
+    }
+  ]
+}
