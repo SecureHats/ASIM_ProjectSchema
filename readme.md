@@ -4,13 +4,17 @@
 [![Maintenance](https://img.shields.io/maintenance/yes/2023.svg?style=flat-square)]()
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-# Deployment package for Log Analytics functions
+# Deployment package for ASIM Schema Project Functions
 
-This template deploys the Log Analytics functions for ASIM Parsers.
+These functions help to simplify the projection of the Manadatory and Recommended columns based of the selected ASIM Schema.<br>
+Because you don't have to think about the fields you need to either `project` or `project-away` when parsing from the CommonEventLog or Syslog table, you can focus on optimizing the parser itself.
+
+Using this function also increases the processing speed which has been tested in multiple large enterprise environments
+
+## How to use
+
+This template deploys the ASIM Project Schema functions for ASIM Parsers.
 After deploying this function package the `ASIM_ProjectSchema` function becomes available which can be used to automatically project the appropriate ASIM Schema columns based on the `EventSchema` type in the parser.  
-
-The function will _project_ all mandatory and recommended fields that are available for the selected schema.
-The AdditionFields colummn is projected as a packed json object containing the other fields if available. 
 
 For more information about Log Analytics functions refer to:
 
@@ -19,28 +23,18 @@ For more information about Log Analytics functions refer to:
 
 <br/>
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FASIM%2FLibrary%2FARM%2FFullDeployment.json) [![Deploy to Azure Gov](https://aka.ms/deploytoazuregovbutton)](https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FASIM%2FLibrary%2FARM%2FFullDeployment.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FASIM_ProjectSchema%2Fmain%2Fdeployment.json) [![Deploy to Azure Gov](https://aka.ms/deploytoazuregovbutton)](https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FASIM_ProjectSchema%2Fmain%2Fdeployment.json)
 
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FSentinel-playground%2Fmain%2FARM-Templates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FSentinel-playground%2Fmain%2FARM-Templates%2FUiDefinition.json)
 
-# Microsoft Sentinel ASIM Project Functions
+## How to use
 
-These Microsoft Sentinel Functions can be used to project all Mandatory and Recommended columns.
+The Project Schema function is extremely easy to use!<br>
+One of the _*Mandatory*_ fields in an ASIM parser is the `EventSchema`<br>
+Based on the value in the `EventSchema` column of the parser, the appropriate _function_ will be called to project the columns related to the specific schema. <br>
+Just enter the following line to the end of your parser, and you are good to go.<br>
 
-#### Prerequisites
+```js
 
-- Azure user account with enough permissions.
+| invoke ASIM_ProjectSchema
 
-The following table summarizes the available functions:
-
-| Deploy    | Function Name |
-| --------- | --------------|
-| [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FASIM_ProjectSchema%2Fmain%2FASIM_ProjectSchema.bicep)             | Default function  |
-| [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FAsimParsers%2Fmain%2FASIM_project%2FASIM_ProjectNetworkSessionSchema.json) | Network Session   |
-| [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FAsimParsers%2Fmain%2FASIM_project%2FASIM_ProjectAuthenticationSchema.json) | Authentication    |
-| [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FAsimParsers%2Fmain%2FASIM_project%2FASIM_ProjectAuditEventSchema.json)     | Audit Event       |
-| [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FAsimParsers%2Fmain%2FASIM_project%2FASIM_ProjectFileEventSchema.json)      | File Event        |
-| [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FAsimParsers%2Fmain%2FASIM_project%2FASIM_ProjectProcessEventSchema.json)   | Process Event     |
-| [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FAsimParsers%2Fmain%2FASIM_project%2FASIM_ProjectRegistryEventSchema.json)  | Registry Event    |
-| [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FAsimParsers%2Fmain%2FASIM_project%2FASIM_ProjectWebSessionSchema.json)     | Web Sessions      |
-| [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSecureHats%2FAsimParsers%2Fmain%2FASIM_project%2FASIM_ProjectDnsSchema.json)            | Dns               |
+```
