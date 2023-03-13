@@ -25,7 +25,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/ASIM_ProjectAuditEventSchema.json",
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectAuditEventSchema.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -45,7 +45,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/ASIM_ProjectAuthenticationSchema.json",
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectAuthenticationSchema.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -65,7 +65,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/ASIM_ProjectDnsSchema.json",
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectDnsSchema.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -85,7 +85,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/ASIM_ProjectFileEventSchema.json",
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectFileEventSchema.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -105,7 +105,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/ASIM_ProjectNetworkSessionSchema.json",
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectNetworkSessionSchema.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -125,7 +125,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/ASIM_ProjectProcessEventSchema.json",
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectProcessEventSchema.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -145,7 +145,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/ASIM_ProjectRegistryEventSchema.json",
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectRegistryEventSchema.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -165,7 +165,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/ASIM_ProjectWebSessionSchema.json",
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectWebSessionSchema.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -185,7 +185,7 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/ASIM_ProjectSchema.json",
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectSchema.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
