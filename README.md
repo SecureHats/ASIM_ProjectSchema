@@ -35,6 +35,8 @@ Just enter the following line to the end of your parser, and you are good to go.
 
 ## How it works
 
-- The `ASIM_ProjoctSchema` function will evaluate the value _*Mandatory*_ `EventSchema` column<br>
+- The `ASIM_ProjectSchema` function will evaluate the value _*Mandatory*_ `EventSchema` column<br>
 - Based on the value in the `EventSchema` column the appropriate _project function_ will be called
 - The dedicated Schema function will project the `Mandatory`, `Recommended` and `AdditionalFields` columns related to the specific schema. <br>
+
+> Optional fields from the ASIM schema will not be projected unless the are added to the `AdditionalFields` column.
