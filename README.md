@@ -25,7 +25,7 @@ Because you don't have to think about the fields you need to either `project` or
 ## How to use
 
 The Project Schema function is extremely easy to use!<br>
-Just enter the following line to the end of your parser, and you are good to go.<br>
+Just add the following line to the end of your parser, and you are good to go.<br>
 
 ```js
 
