@@ -19,7 +19,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     query: '''let NetworkSession =
     T
     | where EventSchema == 'NetworkSession'
-    | invoke ASIM_ProjectNetworkSessionSchema()
+    | invoke ASIM_ProjectNetworkSessionSchema2()
     ;
     let Authentication =
     T
