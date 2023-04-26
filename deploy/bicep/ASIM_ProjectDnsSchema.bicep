@@ -21,7 +21,6 @@ resource Workspace_ASIM_ProjectDnsSchema 'Microsoft.OperationalInsights/workspac
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
-        , tostring(Type)
         , toint(EventCount)
         , todatetime(EventStartTime)
         , todatetime(EventEndTime)

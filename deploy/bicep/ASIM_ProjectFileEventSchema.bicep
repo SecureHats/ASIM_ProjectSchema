@@ -22,7 +22,6 @@ resource Workspace_ASIM_ProjectFileEventSchema 'Microsoft.OperationalInsights/wo
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
-        , tostring(Type)
         , toint(EventCount)
         , todatetime(EventStartTime)
         , todatetime(EventEndTime)

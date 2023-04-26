@@ -22,7 +22,6 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
-        , tostring(Type)
         , toint(EventCount)
         , todatetime(EventStartTime)
         , todatetime(EventEndTime)

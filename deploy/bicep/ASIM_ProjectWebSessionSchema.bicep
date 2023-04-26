@@ -20,7 +20,6 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
-        , tostring(Type)
         , toint(EventCount)
         , todatetime(EventStartTime)
         , todatetime(EventEndTime)
