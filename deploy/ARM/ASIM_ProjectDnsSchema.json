@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.12.40.16777",
-      "templateHash": "2122708755783608448"
+      "templateHash": "5692137647480806048"
     }
   },
   "parameters": {
@@ -38,7 +38,7 @@
         "version": 1,
         "category": "ASIM",
         "displayName": "ASIM_ProjectDnsSchema",
-        "query": "    T\r\n    | project\r\n        // Common Mandatory Fields\r\n          todatetime(TimeGenerated)\r\n        , toint(EventCount)\r\n        , todatetime(EventStartTime)\r\n        , todatetime(EventEndTime)\r\n        , tostring(EventType)\r\n        , tostring(EventResult)\r\n        , tostring(EventProduct)\r\n        , tostring(EventVendor)\r\n        , tostring(EventSchema)\r\n        , tostring(EventSchemaVersion)\r\n        , tostring(EventSeverity)\r\n        , tostring(Dvc)\r\n        // Common Recommended Fields\r\n        , tostring(column_ifexists('EventResultDetails', ''))\r\n        , tostring(column_ifexists('EventUid', ''))\r\n        , tostring(column_ifexists('DvcIpAddr', ''))\r\n        , tostring(column_ifexists('DvcHostname', ''))\r\n        , tostring(column_ifexists('DvcDomain', ''))\r\n        // Dns Mandatory Fields\r\n        , tostring(DnsQuery)\r\n        // Dns Recommended Fields\r\n        , tostring(column_ifexists('SrcIpAddr', ''))\r\n        , tostring(column_ifexists('SrcHostname', ''))\r\n        , tostring(column_ifexists('SrcDomain', ''))\r\n        , tostring(column_ifexists('DnsQueryTypeName', ''))\r\n        , tostring(column_ifexists('TransactionIdHex', ''))\r\n        , tostring(_ItemId)\r\n    | project-away Column*",
+        "query": "    T\r\n    | project\r\n        // Common Mandatory Fields\r\n          todatetime(TimeGenerated)\r\n        , toint(column_ifexists('EventCount', ''))\r\n        , todatetime(column_ifexists('EventStartTime', ''))\r\n        , todatetime(column_ifexists('EventEndTime', ''))\r\n        , tostring(column_ifexists('EventType', ''))\r\n        , tostring(column_ifexists('EventResult', ''))\r\n        , tostring(column_ifexists('EventProduct', ''))\r\n        , tostring(column_ifexists('EventVendor', ''))\r\n        , tostring(column_ifexists('EventSchema', ''))\r\n        , tostring(column_ifexists('EventSchemaVersion', ''))\r\n        , tostring(column_ifexists('EventSeverity', ''))\r\n        , tostring(column_ifexists('Dvc', ''))\r\n        // Common Recommended Fields\r\n        , tostring(column_ifexists('EventResultDetails', ''))\r\n        , tostring(column_ifexists('EventUid', ''))\r\n        , tostring(column_ifexists('DvcIpAddr', ''))\r\n        , tostring(column_ifexists('DvcHostname', ''))\r\n        , tostring(column_ifexists('DvcDomain', ''))\r\n        // Dns Mandatory Fields\r\n        , tostring(column_ifexists('DnsQuery', ''))\r\n        // Dns Recommended Fields\r\n        , tostring(column_ifexists('SrcIpAddr', ''))\r\n        , tostring(column_ifexists('SrcHostname', ''))\r\n        , tostring(column_ifexists('SrcDomain', ''))\r\n        , tostring(column_ifexists('DnsQueryTypeName', ''))\r\n        , tostring(column_ifexists('TransactionIdHex', ''))\r\n        , tostring(_ItemId)\r\n    | project-away Column*",
         "functionParameters": "T:(TimeGenerated:datetime, _ItemId:string)",
         "functionAlias": "ASIM_ProjectDnsSchema"
       },

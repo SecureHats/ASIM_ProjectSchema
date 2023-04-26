@@ -27,50 +27,50 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     | where EventSchema == 'NetworkSession'
     | invoke ASIM_ProjectNetworkSessionOptional()
     ;
-    // let Authentication =
-    // T
-    // | where EventSchema == 'Authentication'
-    // | invoke ASIM_ProjectAuthenticationSchema()
-    // ;
-    // let AuditEvent =
-    // T
-    // | where EventSchema == 'AuditEvent'
-    // | invoke ASIM_ProjectAuditEventSchema()
-    // ;
-    // let FileEvent =
-    // T
-    // | where EventSchema == 'FileEvent'
-    // | invoke ASIM_ProjectFileEventSchema()
-    // ;
-    // let ProcessEvent =
-    // T
-    // | where EventSchema == 'ProcessEvent'
-    // | invoke ASIM_ProjectProcessEventSchema()
-    // ;
-    // let RegistryEvent =
-    // T
-    // | where EventSchema == 'RegistryEvent'
-    // | invoke ASIM_ProjectRegistryEventSchema()
-    // ;
-    // let WebSession =
-    // T
-    // | where EventSchema == 'WebSession'
-    // | invoke ASIM_ProjectWebSessionSchema()
-    // ;
-    // let Dns =
-    // T
-    // | where EventSchema == 'Dns'
-    // | invoke ASIM_ProjectDnsSchema()
-    // ;
+    let Authentication =
+    T
+    | where EventSchema == 'Authentication'
+    | invoke ASIM_ProjectAuthenticationSchema()
+    ;
+    let AuditEvent =
+    T
+    | where EventSchema == 'AuditEvent'
+    | invoke ASIM_ProjectAuditEventSchema()
+    ;
+    let FileEvent =
+    T
+    | where EventSchema == 'FileEvent'
+    | invoke ASIM_ProjectFileEventSchema()
+    ;
+    let ProcessEvent =
+    T
+    | where EventSchema == 'ProcessEvent'
+    | invoke ASIM_ProjectProcessEventSchema()
+    ;
+    let RegistryEvent =
+    T
+    | where EventSchema == 'RegistryEvent'
+    | invoke ASIM_ProjectRegistryEventSchema()
+    ;
+    let WebSession =
+    T
+    | where EventSchema == 'WebSession'
+    | invoke ASIM_ProjectWebSessionSchema()
+    ;
+    let Dns =
+    T
+    | where EventSchema == 'Dns'
+    | invoke ASIM_ProjectDnsSchema()
+    ;
     union isfuzzy = false 
     (NetworkSession | join kind=inner NetworkSessionOptional on $left._ItemId == $right._ItemId)
-      // , Authentication
-      // , AuditEvent
-      // , FileEvent
-      // , ProcessEvent
-      // , RegistryEvent
-      // , WebSession
-      // , Dns
+      , Authentication
+      , AuditEvent
+      , FileEvent
+      , ProcessEvent
+      , RegistryEvent
+      , WebSession
+      , Dns
     | project-away _ItemId*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string)'
     functionAlias: 'ASIM_ProjectSchema'
