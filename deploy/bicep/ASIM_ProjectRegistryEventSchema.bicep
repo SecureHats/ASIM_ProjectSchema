@@ -46,13 +46,13 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
         // ProcessEvent Recommended Fields
         , tostring(column_ifexists('ActorUserId', ''))
         , tostring(column_ifexists('ParentProcessId', ''))
-        , tostring(column_ifexists)('RegistryPreviousKey', ''))
-        , tostring(column_ifexists)('RegistryPreviousValue', ''))
-        , tostring(column_ifexists)('RegistryPreviousValueData', ''))
-        , tostring(column_ifexists)('RegistryPreviousValueType', ''))
-        , tostring(column_ifexists)('RegistryValue', ''))
-        , tostring(column_ifexists)('RegistryValueData', ''))
-        , tostring(column_ifexists)('RegistryValueType', ''))
+        , tostring(column_ifexists('RegistryPreviousKey', ''))
+        , tostring(column_ifexists('RegistryPreviousValue', ''))
+        , tostring(column_ifexists('RegistryPreviousValueData', ''))
+        , tostring(column_ifexists('RegistryPreviousValueType', ''))
+        , tostring(column_ifexists('RegistryValue', ''))
+        , tostring(column_ifexists('RegistryValueData', ''))
+        , tostring(column_ifexists('RegistryValueType', ''))
         , _ItemId
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
