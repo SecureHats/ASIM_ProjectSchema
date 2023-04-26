@@ -2,7 +2,7 @@
 param WorkspaceRegion string = resourceGroup().location
 
 @description('The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group.')
-param Workspace string
+param Workspace string = 'gsia002-it-weu-a01-stl-oms01'
 
 resource Workspace_resource 'Microsoft.OperationalInsights/workspaces@2017-03-15-preview' = {
   name: Workspace
@@ -16,7 +16,8 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     version: 1
     category: 'ASIM'
     displayName: 'ASIM_ProjectSchema'
-    query: '''let NetworkSession =
+    query: '''
+    let NetworkSession =
     T
     | where EventSchema == 'NetworkSession'
     | invoke ASIM_ProjectNetworkSessionSchema()
@@ -62,15 +63,16 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     | invoke ASIM_ProjectDnsSchema()
     ;
     union isfuzzy = false 
-      NetworkSession | join (NetworkSessionOptional on TimeGenerated)
+    (NetworkSession | join kind=inner NetworkSessionOptional on $left._ItemId == $right._ItemId)
       , Authentication
       , AuditEvent
       , FileEvent
       , ProcessEvent
       , RegistryEvent
       , WebSession
-      , Dns'''
-    functionParameters: 'T:(TimeGenerated:datetime), EventSchema:string=\'*\''
+      , Dns
+    | project-away _*, *1'''
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string)'
     functionAlias: 'ASIM_ProjectSchema'
   }
 }

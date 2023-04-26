@@ -9,14 +9,16 @@ resource Workspace_resource 'Microsoft.OperationalInsights/workspaces@2017-03-15
   location: WorkspaceRegion
 }
 
-resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/workspaces/savedSearches@2020-08-01' = {
+resource Workspace_ASIM_ProjectAuthenticationSchema 'Microsoft.OperationalInsights/workspaces/savedSearches@2022-10-01' = {
   parent: Workspace_resource
-  name: '_ASIM_ProjectWebSessionSchema'
+  name: '_ASIM_ProjectAuthenticationSchema'
   properties: {
     version: 1
     category: 'ASIM'
-    displayName: 'ASIM_ProjectWebSessionSchema'
-    query: '''T
+    displayName: 'ASIM_ProjectAuthenticationSchema'
+    etag: '*'
+    query: '''
+    T
     | project
         // Common Mandatory Fields
           todatetime('TimeGenerated')
@@ -38,19 +40,16 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('DvcIpAddr', ''))
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
-        // WebSession Mandatory Fields
-        , tostring('Dst')  
-        // WebSession Recommended Fields
-        , tostring(column_ifexists('ASimMatchingIpAddr', ''))
-        , tostring(column_ifexists('DstHostname', ''))
-        , tostring(column_ifexists('DstIpAddr', ''))
-        , tostring(column_ifexists('Src', ''))
-        , tostring(column_ifexists('SrcDomain', ''))
-        , tostring(column_ifexists('SrcHostname', ''))
+        // Authentication Schema Mandatory Fields
+        // Authentication Schema Recommended Fields
+        , tostring(column_ifexists('Dst', ''))
+        , tostring(column_ifexists('Src', ''))        
         , tostring(column_ifexists('SrcIpAddr', ''))
+        , tostring(column_ifexists('TargetHostname', ''))
+        , tostring(column_ifexists('TargetDomain', ''))
         , _ItemId
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
-    functionAlias: 'ASIM_ProjectWebSessionSchema'
+    FunctionAlias: 'ASIM_ProjectAuthenticationSchema'
   }
 }
