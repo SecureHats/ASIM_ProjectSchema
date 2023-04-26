@@ -1,33 +1,13 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/deploymentTemplate.json#",
-  "resources": [
-    {
-      "type": "Microsoft.OperationalInsights/workspaces",
-      "name": "[parameters('Workspace')]",
-      "resources": [
-        {
-          "type": "savedSearches",
-          "name": "_ASIM_ProjectDnsSchema",
-          "properties": {
-            "version": 1,
-            "category": "ASIM",
-            "displayName": "ASIM_ProjectDnsSchema",
-            "etag": "*",
-            "query": "T\n| project\n    // Common Mandatory Fields\n      todatetime(column_ifexists('TimeGenerated', ''))\n    , tostring(column_ifexists('Type', ''))\n    , toint(column_ifexists('EventCount', ''))\n    , todatetime(column_ifexists('EventStartTime', ''))\n    , todatetime(column_ifexists('EventEndTime', ''))\n    , tostring(column_ifexists('EventType', ''))\n    , tostring(column_ifexists('EventResult', ''))\n    , tostring(column_ifexists('EventProduct', ''))\n    , tostring(column_ifexists('EventVendor', ''))\n    , tostring(column_ifexists('EventSchema', ''))\n    , tostring(column_ifexists('EventSchemaVersion', ''))\n    , tostring(column_ifexists('Dvc', ''))\n    // Common Recommended Fields\n    , tostring(column_ifexists('EventResultDetails', ''))\n    , tostring(column_ifexists('EventSeverity', ''))\n    , tostring(column_ifexists('EventUid', ''))\n    , tostring(column_ifexists('DvcIpAddr', ''))\n    , tostring(column_ifexists('DvcHostname', ''))\n    , tostring(column_ifexists('DvcDomain', ''))\n    , tostring(column_ifexists('DvcDomainType', ''))\n    , tostring(column_ifexists('DvcFQDN', ''))\n    , tostring(column_ifexists('DvcId', ''))\n    , tostring(column_ifexists('DvcIdType', ''))\n    , tostring(column_ifexists('DvcAction', ''))\n    // Dns Mandatory Fields\n    , tostring(column_ifexists('DnsResponseCodeName', ''))\n    , tostring(column_ifexists('Src', ''))\n    // Dns Recommended Fields\n    , tostring(column_ifexists('DnsQuery', ''))\n    , tostring(column_ifexists('Domain', ''))\n    , tostring(column_ifexists('DnsQueryClassName', ''))\n    , tostring(column_ifexists('Dst', ''))\n    , tostring(column_ifexists('SrcDomain', ''))\n    , tostring(column_ifexists('SrcHostname', ''))\n    , tostring(column_ifexists('Hostname', ''))\n    , tostring(column_ifexists('SrcIpAddr', ''))\n    , tostring(column_ifexists('IpAddr', ''))\n    , tostring(column_ifexists('TransactionIdHex', ''))\n    // Dns Optional Fields\n    , column_ifexists('AdditionalFields', '')\n| project-away Column*",
-            "functionParameters": "T:(TimeGenerated:datetime)",
-            "FunctionAlias": "ASIM_ProjectDnsSchema"
-          },
-          "apiVersion": "2020-08-01",
-          "dependsOn": [
-            "[concat('Microsoft.OperationalInsights/workspaces/', parameters('Workspace'))]"
-          ]
-        }
-      ],
-      "apiVersion": "2017-03-15-preview",
-      "location": "[parameters('WorkspaceRegion')]"
-    }
-  ],
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.12.40.16777",
+      "templateHash": "10968721590161869277"
+    }
+  },
   "parameters": {
     "WorkspaceRegion": {
       "type": "string",
@@ -42,5 +22,29 @@
         "description": "The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group."
       }
     }
-  }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces",
+      "apiVersion": "2017-03-15-preview",
+      "name": "[parameters('Workspace')]",
+      "location": "[parameters('WorkspaceRegion')]"
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
+      "apiVersion": "2020-08-01",
+      "name": "[format('{0}/{1}', parameters('Workspace'), '_ASIM_ProjectDnsSchema')]",
+      "properties": {
+        "version": 1,
+        "category": "ASIM",
+        "displayName": "ASIM_ProjectDnsSchema",
+        "query": "    T\r\n    | project\r\n        // Common Mandatory Fields\r\n          todatetime('TimeGenerated')\r\n        , tostring('Type')\r\n        , toint('EventCount')\r\n        , todatetime('EventStartTime')\r\n        , todatetime('EventEndTime')\r\n        , tostring('EventType')\r\n        , tostring('EventResult')\r\n        , tostring('EventProduct')\r\n        , tostring('EventVendor')\r\n        , tostring('EventSchema')\r\n        , tostring('EventSchemaVersion')\r\n        , tostring('EventSeverity')\r\n        , tostring('Dvc')\r\n        // Common Recommended Fields\r\n        , tostring(column_ifexists('EventResultDetails', ''))\r\n        , tostring(column_ifexists('EventUid', ''))\r\n        , tostring(column_ifexists('DvcIpAddr', ''))\r\n        , tostring(column_ifexists('DvcHostname', ''))\r\n        , tostring(column_ifexists('DvcDomain', ''))\r\n        // Dns Mandatory Fields\r\n        , tostring('DnsQuery')\r\n        // Dns Recommended Fields\r\n        , tostring(column_ifexists('SrcIpAddr', ''))\r\n        , tostring(column_ifexists('SrcHostname', ''))\r\n        , tostring(column_ifexists('SrcDomain', ''))\r\n        , tostring(column_ifexists('DnsQueryTypeName', ''))\r\n        , tostring(column_ifexists('TransactionIdHex', ''))\r\n        , _ItemId\r\n    | project-away Column*",
+        "functionParameters": "T:(TimeGenerated:datetime, _ItemId:string)",
+        "functionAlias": "ASIM_ProjectDnsSchema"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('Workspace'))]"
+      ]
+    }
+  ]
 }

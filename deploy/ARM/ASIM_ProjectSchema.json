@@ -1,32 +1,13 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "resources": [
-    {
-      "type": "Microsoft.OperationalInsights/workspaces",
-      "name": "[parameters('Workspace')]",
-      "resources": [
-        {
-          "type": "savedSearches",
-          "name": "ASIM_ProjectSchema",
-          "properties": {
-            "version": 1,
-            "category": "ASIM",
-            "displayName": "ASIM_ProjectSchema",
-            "query": "let NetworkSession =\nT\n| where EventSchema == 'NetworkSession'\n| invoke ASIM_ProjectNetworkSessionSchema()\n;\nlet Authentication =\nT\n| where EventSchema == 'Authentication'\n| invoke ASIM_ProjectAuthenticationSchema()\n;\nlet AuditEvent =\nT\n| where EventSchema == 'AuditEvent'\n| invoke ASIM_ProjectAuditEventSchema()\n;\nlet FileEvent =\nT\n| where EventSchema == 'FileEvent'\n| invoke ASIM_ProjectFileEventSchema()\n;\nlet ProcessEvent =\nT\n| where EventSchema == 'ProcessEvent'\n| invoke ASIM_ProjectProcessEventSchema()\n;\nlet RegistryEvent =\nT\n| where EventSchema == 'RegistryEvent'\n| invoke ASIM_ProjectRegistryEventSchema()\n;\nlet WebSession =\nT\n| where EventSchema == 'WebSession'\n| invoke ASIM_ProjectWebSessionSchema()\n;\nlet Dns =\nT\n| where EventSchema == 'Dns'\n| invoke ASIM_ProjectDnsSchema()\n;\nunion isfuzzy = false NetworkSession, Authentication, AuditEvent, FileEvent, ProcessEvent, RegistryEvent, WebSession, Dns",
-            "functionParameters": "T:(TimeGenerated:datetime), EventSchema:string='*'",
-            "FunctionAlias": "ASIM_ProjectSchema"
-          },
-          "apiVersion": "2020-08-01",
-          "dependsOn": [
-            "[concat('Microsoft.OperationalInsights/workspaces/', parameters('Workspace'))]"
-          ]
-        }
-      ],
-      "apiVersion": "2017-03-15-preview",
-      "location": "[parameters('WorkspaceRegion')]"
-    }
-  ],
   "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.12.40.16777",
+      "templateHash": "553197245272329557"
+    }
+  },
   "parameters": {
     "WorkspaceRegion": {
       "type": "string",
@@ -37,9 +18,34 @@
     },
     "Workspace": {
       "type": "string",
+      "defaultValue": "gsia002-it-weu-a01-stl-oms01",
       "metadata": {
         "description": "The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group."
       }
     }
-  }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces",
+      "apiVersion": "2017-03-15-preview",
+      "name": "[parameters('Workspace')]",
+      "location": "[parameters('WorkspaceRegion')]"
+    },
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
+      "apiVersion": "2020-08-01",
+      "name": "[format('{0}/{1}', parameters('Workspace'), 'ASIM_ProjectSchema')]",
+      "properties": {
+        "version": 1,
+        "category": "ASIM",
+        "displayName": "ASIM_ProjectSchema",
+        "query": "    let NetworkSession =\r\n    T\r\n    | where EventSchema == 'NetworkSession'\r\n    | invoke ASIM_ProjectNetworkSessionSchema()\r\n    ;\r\n    let NetworkSessionOptional =\r\n    T\r\n    | where EventSchema == 'NetworkSession'\r\n    | invoke ASIM_ProjectNetworkSessionOptional()\r\n    ;\r\n    let Authentication =\r\n    T\r\n    | where EventSchema == 'Authentication'\r\n    | invoke ASIM_ProjectAuthenticationSchema()\r\n    ;\r\n    let AuditEvent =\r\n    T\r\n    | where EventSchema == 'AuditEvent'\r\n    | invoke ASIM_ProjectAuditEventSchema()\r\n    ;\r\n    let FileEvent =\r\n    T\r\n    | where EventSchema == 'FileEvent'\r\n    | invoke ASIM_ProjectFileEventSchema()\r\n    ;\r\n    let ProcessEvent =\r\n    T\r\n    | where EventSchema == 'ProcessEvent'\r\n    | invoke ASIM_ProjectProcessEventSchema()\r\n    ;\r\n    let RegistryEvent =\r\n    T\r\n    | where EventSchema == 'RegistryEvent'\r\n    | invoke ASIM_ProjectRegistryEventSchema()\r\n    ;\r\n    let WebSession =\r\n    T\r\n    | where EventSchema == 'WebSession'\r\n    | invoke ASIM_ProjectWebSessionSchema()\r\n    ;\r\n    let Dns =\r\n    T\r\n    | where EventSchema == 'Dns'\r\n    | invoke ASIM_ProjectDnsSchema()\r\n    ;\r\n    union isfuzzy = false \r\n    (NetworkSession | join kind=inner NetworkSessionOptional on $left._ItemId == $right._ItemId)\r\n      , Authentication\r\n      , AuditEvent\r\n      , FileEvent\r\n      , ProcessEvent\r\n      , RegistryEvent\r\n      , WebSession\r\n      , Dns\r\n    | project-away _*, *1",
+        "functionParameters": "T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string)",
+        "functionAlias": "ASIM_ProjectSchema"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('Workspace'))]"
+      ]
+    }
+  ]
 }

@@ -121,6 +121,26 @@
       {
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2020-10-01",
+        "name": "linkedASIM_NetworkSessionSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectNetworkSessionOptional.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            },
+            "WorkspaceRegion": {
+              "value": "[parameters('WorkspaceRegion')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
         "name": "linkedASIM_ProcessEventSchema",
         "properties": {
           "mode": "Incremental",
