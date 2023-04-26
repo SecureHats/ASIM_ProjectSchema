@@ -22,7 +22,7 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
-        , toint(EventCount)
+        , toint(column_ifexists('EventCount', ''))
         , todatetime(EventStartTime)
         , todatetime(EventEndTime)
         , tostring(EventType)
