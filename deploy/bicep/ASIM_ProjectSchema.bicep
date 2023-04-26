@@ -71,7 +71,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       , RegistryEvent
       , WebSession
       , Dns
-    | project-away _*, *1'''
+    | project-away _ItemId*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string)'
     functionAlias: 'ASIM_ProjectSchema'
   }
