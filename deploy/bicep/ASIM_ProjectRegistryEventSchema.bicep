@@ -20,19 +20,19 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
     query: '''T
     | project
         // Common Mandatory Fields
-          todatetime('TimeGenerated')
-        , tostring('Type')
-        , toint('EventCount')
-        , todatetime('EventStartTime')
-        , todatetime('EventEndTime')
-        , tostring('EventType')
-        , tostring('EventResult')
-        , tostring('EventProduct')
-        , tostring('EventVendor')
-        , tostring('EventSchema')
-        , tostring('EventSchemaVersion')
-        , tostring('EventSeverity')
-        , tostring('Dvc')
+          todatetime(TimeGenerated)
+        , tostring(Type)
+        , toint(EventCount)
+        , todatetime(EventStartTime)
+        , todatetime(EventEndTime)
+        , tostring(EventType)
+        , tostring(EventResult)
+        , tostring(EventProduct)
+        , tostring(EventVendor)
+        , tostring(EventSchema)
+        , tostring(EventSchemaVersion)
+        , tostring(EventSeverity)
+        , tostring(Dvc)
         // Common Recommended Fields
         , tostring(column_ifexists('EventResultDetails', ''))
         , tostring(column_ifexists('EventUid', ''))
@@ -40,9 +40,9 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
         // ProcessEvent Mandatory Fields
-        , tostring('ActingProcessId')
-        , tostring('ActorUsername')
-        , tostring('RegistryKey')
+        , tostring(ActingProcessId)
+        , tostring(ActorUsername)
+        , tostring(RegistryKey)
         // ProcessEvent Recommended Fields
         , tostring(column_ifexists('ActorUserId', ''))
         , tostring(column_ifexists('ParentProcessId', ''))
@@ -53,7 +53,7 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
         , tostring(column_ifexists('RegistryValue', ''))
         , tostring(column_ifexists('RegistryValueData', ''))
         , tostring(column_ifexists('RegistryValueType', ''))
-        , _ItemId
+        , tostring(_ItemId)
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectRegistryEventSchema'

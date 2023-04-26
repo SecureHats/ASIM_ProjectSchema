@@ -20,19 +20,19 @@ resource Workspace_ASIM_ProjectDnsSchema 'Microsoft.OperationalInsights/workspac
     T
     | project
         // Common Mandatory Fields
-          todatetime('TimeGenerated')
-        , tostring('Type')
-        , toint('EventCount')
-        , todatetime('EventStartTime')
-        , todatetime('EventEndTime')
-        , tostring('EventType')
-        , tostring('EventResult')
-        , tostring('EventProduct')
-        , tostring('EventVendor')
-        , tostring('EventSchema')
-        , tostring('EventSchemaVersion')
-        , tostring('EventSeverity')
-        , tostring('Dvc')
+          todatetime(TimeGenerated)
+        , tostring(Type)
+        , toint(EventCount)
+        , todatetime(EventStartTime)
+        , todatetime(EventEndTime)
+        , tostring(EventType)
+        , tostring(EventResult)
+        , tostring(EventProduct)
+        , tostring(EventVendor)
+        , tostring(EventSchema)
+        , tostring(EventSchemaVersion)
+        , tostring(EventSeverity)
+        , tostring(Dvc)
         // Common Recommended Fields
         , tostring(column_ifexists('EventResultDetails', ''))
         , tostring(column_ifexists('EventUid', ''))
@@ -40,14 +40,14 @@ resource Workspace_ASIM_ProjectDnsSchema 'Microsoft.OperationalInsights/workspac
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
         // Dns Mandatory Fields
-        , tostring('DnsQuery')
+        , tostring(DnsQuery)
         // Dns Recommended Fields
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('SrcHostname', ''))
         , tostring(column_ifexists('SrcDomain', ''))
         , tostring(column_ifexists('DnsQueryTypeName', ''))
         , tostring(column_ifexists('TransactionIdHex', ''))
-        , _ItemId
+        , tostring(_ItemId)
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectDnsSchema'

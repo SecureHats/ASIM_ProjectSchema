@@ -21,19 +21,19 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
     T
     | project
         // Common Mandatory Fields
-          todatetime('TimeGenerated')
-        , tostring('Type')
-        , toint('EventCount')
-        , todatetime('EventStartTime')
-        , todatetime('EventEndTime')
-        , tostring('EventType')
-        , tostring('EventResult')
-        , tostring('EventProduct')
-        , tostring('EventVendor')
-        , tostring('EventSchema')
-        , tostring('EventSchemaVersion')
-        , tostring('EventSeverity')
-        , tostring('Dvc')
+          todatetime(TimeGenerated)
+        , tostring(Type)
+        , toint(EventCount)
+        , todatetime(EventStartTime)
+        , todatetime(EventEndTime)
+        , tostring(EventType)
+        , tostring(EventResult)
+        , tostring(EventProduct)
+        , tostring(EventVendor)
+        , tostring(EventSchema)
+        , tostring(EventSchemaVersion)
+        , tostring(EventSeverity)
+        , tostring(Dvc)
         // Common Recommended Fields
         , tostring(column_ifexists('EventResultDetails', ''))
         , tostring(column_ifexists('EventUid', ''))
@@ -41,7 +41,7 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
         // AuditEvent Mandatory Fields
-        , tostring('Operation')
+        , tostring(Operation)
         // AuditEvent Recommended Fields
         , tostring(column_ifexists('ActorUsername', ''))
         , tostring(column_ifexists('DvcAction', ''))
@@ -53,7 +53,7 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('TargetIpAddr', ''))
         , tostring(column_ifexists('TargetHostName', ''))
-        , _ItemId
+        , tostring(_ItemId)
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     FunctionAlias: 'ASIM_ProjectAuditEventSchema'

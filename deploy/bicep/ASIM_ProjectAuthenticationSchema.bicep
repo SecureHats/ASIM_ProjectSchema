@@ -21,19 +21,19 @@ resource Workspace_ASIM_ProjectAuthenticationSchema 'Microsoft.OperationalInsigh
     T
     | project
         // Common Mandatory Fields
-          todatetime('TimeGenerated')
-        , tostring('Type')
-        , toint('EventCount')
-        , todatetime('EventStartTime')
-        , todatetime('EventEndTime')
-        , tostring('EventType')
-        , tostring('EventResult')
-        , tostring('EventProduct')
-        , tostring('EventVendor')
-        , tostring('EventSchema')
-        , tostring('EventSchemaVersion')
-        , tostring('EventSeverity')
-        , tostring('Dvc')
+          todatetime(TimeGenerated)
+        , tostring(Type)
+        , toint(EventCount)
+        , todatetime(EventStartTime)
+        , todatetime(EventEndTime)
+        , tostring(EventType)
+        , tostring(EventResult)
+        , tostring(EventProduct)
+        , tostring(EventVendor)
+        , tostring(EventSchema)
+        , tostring(EventSchemaVersion)
+        , tostring(EventSeverity)
+        , tostring(Dvc)
         // Common Recommended Fields
         , tostring(column_ifexists('EventResultDetails', ''))
         , tostring(column_ifexists('EventUid', ''))
@@ -47,7 +47,7 @@ resource Workspace_ASIM_ProjectAuthenticationSchema 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('TargetHostname', ''))
         , tostring(column_ifexists('TargetDomain', ''))
-        , _ItemId
+        , tostring(_ItemId)
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     FunctionAlias: 'ASIM_ProjectAuthenticationSchema'

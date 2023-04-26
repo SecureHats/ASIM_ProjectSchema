@@ -21,19 +21,19 @@ resource Workspace_ASIM_ProjectFileEventSchema 'Microsoft.OperationalInsights/wo
     T
     | project
         // Common Mandatory Fields
-          todatetime('TimeGenerated')
-        , tostring('Type')
-        , toint('EventCount')
-        , todatetime('EventStartTime')
-        , todatetime('EventEndTime')
-        , tostring('EventType')
-        , tostring('EventResult')
-        , tostring('EventProduct')
-        , tostring('EventVendor')
-        , tostring('EventSchema')
-        , tostring('EventSchemaVersion')
-        , tostring('EventSeverity')
-        , tostring('Dvc')
+          todatetime(TimeGenerated)
+        , tostring(Type)
+        , toint(EventCount)
+        , todatetime(EventStartTime)
+        , todatetime(EventEndTime)
+        , tostring(EventType)
+        , tostring(EventResult)
+        , tostring(EventProduct)
+        , tostring(EventVendor)
+        , tostring(EventSchema)
+        , tostring(EventSchemaVersion)
+        , tostring(EventSeverity)
+        , tostring(Dvc)
         // Common Recommended Fields
         , tostring(column_ifexists('EventResultDetails', ''))
         , tostring(column_ifexists('EventUid', ''))
@@ -41,15 +41,15 @@ resource Workspace_ASIM_ProjectFileEventSchema 'Microsoft.OperationalInsights/wo
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
         // FileEvent Mandatory Fields
-        , tostring('ActorUsername')
-        , tostring('TargetFilePathType')
+        , tostring(ActorUsername)
+        , tostring(TargetFilePathType)
         // FileEvent Recommended Fields
         , tostring(column_ifexists('ActorUserId', ''))
         , tostring(column_ifexists('DvcAction', ''))
         , tostring(column_ifexists('SrcFilePathType', ''))
         , tostring(column_ifexists('SrcFilePath', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
-        , _ItemId
+        , tostring(_ItemId)
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectFileEventSchema'

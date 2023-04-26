@@ -19,19 +19,19 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
     query: '''T
     | project
         // Common Mandatory Fields
-          todatetime('TimeGenerated')
-        , tostring('Type')
-        , toint('EventCount')
-        , todatetime('EventStartTime')
-        , todatetime('EventEndTime')
-        , tostring('EventType')
-        , tostring('EventResult')
-        , tostring('EventProduct')
-        , tostring('EventVendor')
-        , tostring('EventSchema')
-        , tostring('EventSchemaVersion')
-        , tostring('EventSeverity')
-        , tostring('Dvc')
+          todatetime(TimeGenerated)
+        , tostring(Type)
+        , toint(EventCount)
+        , todatetime(EventStartTime)
+        , todatetime(EventEndTime)
+        , tostring(EventType)
+        , tostring(EventResult)
+        , tostring(EventProduct)
+        , tostring(EventVendor)
+        , tostring(EventSchema)
+        , tostring(EventSchemaVersion)
+        , tostring(EventSeverity)
+        , tostring(Dvc)
         // Common Recommended Fields
         , tostring(column_ifexists('EventResultDetails', ''))
         , tostring(column_ifexists('EventUid', ''))
@@ -39,7 +39,7 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
         // WebSession Mandatory Fields
-        , tostring('Dst')  
+        , tostring(Dst)  
         // WebSession Recommended Fields
         , tostring(column_ifexists('ASimMatchingIpAddr', ''))
         , tostring(column_ifexists('DstHostname', ''))
@@ -48,7 +48,7 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('SrcDomain', ''))
         , tostring(column_ifexists('SrcHostname', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
-        , _ItemId
+        , tostring(_ItemId)
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectWebSessionSchema'

@@ -126,7 +126,7 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('ThreatOriginalRiskLevel', ''))
         , toint(column_ifexists('ThreatRiskLevel', ''))
         , tostring(column_ifexists('SrcScopeId', ''))
-        , _ItemId
+        , tostring(_ItemId)
     | project-away Column*'''
     version: 1
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
