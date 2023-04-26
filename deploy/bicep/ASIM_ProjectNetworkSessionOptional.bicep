@@ -53,7 +53,6 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('DstVlanId', ''))
         , tostring(column_ifexists('DstZone', ''))
         , tostring(column_ifexists('DvcAction', ''))
-        , tostring(column_ifexists('DvcAction', ''))
         , tostring(column_ifexists('DvcDescription', ''))
         , tostring(column_ifexists('DvcFQDN', ''))
         , tostring(column_ifexists('DvcId', ''))

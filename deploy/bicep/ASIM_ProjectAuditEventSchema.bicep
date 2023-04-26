@@ -46,7 +46,6 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('ActorUsername', ''))
         , tostring(column_ifexists('DvcAction', ''))
         , tostring(column_ifexists('Dst', ''))
-        , tostring(column_ifexists('EventUid', ''))
         , tostring(column_ifexists('NewValue', ''))
         , tostring(column_ifexists('Object', ''))
         , tostring(column_ifexists('ObjectId', ''))
