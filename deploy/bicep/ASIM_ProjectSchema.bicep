@@ -25,6 +25,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     T
     | where EventSchema == 'NetworkSession'
     | invoke ASIM_ProjectNetworkSessionOptional()
+    ;
     let Authentication =
     T
     | where EventSchema == 'Authentication'
@@ -61,8 +62,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     | invoke ASIM_ProjectDnsSchema()
     ;
     union isfuzzy = false 
-      NetworkSession
-      , NetworkSessionOptional
+      NetworkSession | join (NetworkSessionOptional on TimeGenerated)
       , Authentication
       , AuditEvent
       , FileEvent
@@ -70,7 +70,6 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       , RegistryEvent
       , WebSession
       , Dns'''
-    join 
     functionParameters: 'T:(TimeGenerated:datetime), EventSchema:string=\'*\''
     functionAlias: 'ASIM_ProjectSchema'
   }
