@@ -129,6 +129,6 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
         , tostring(_ItemId)
     | project-away Column*'''
     version: 1
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, disabled:bool)'
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
   }
 }
