@@ -111,7 +111,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       , (WebSession | join kind=inner WebSessionOptional on $left._ItemId == $right._ItemId)
       , (Dns | join kind=inner DnsOptional on $left._ItemId == $right._ItemId)
       | project-away _ItemId*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string, optional:bool)'
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string, optional:bool=false)'
     functionAlias: 'ASIM_ProjectSchema'
   }
 }
