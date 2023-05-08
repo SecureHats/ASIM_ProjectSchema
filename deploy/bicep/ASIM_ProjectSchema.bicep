@@ -24,7 +24,6 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     ;
     let NetworkSessionOptional = 
     T
-    | where not(disabled)
     | where EventSchema == 'NetworkSession' 
     | invoke ASIM_ProjectNetworkSessionOptional()
     ;
