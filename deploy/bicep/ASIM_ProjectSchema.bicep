@@ -18,81 +18,89 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     | where EventSchema == 'NetworkSession'
     | invoke ASIM_ProjectNetworkSessionSchema()
     ;
-    let NetworkSessionOptional = 
+    let NetworkSessionOptional = (optional:bool=false) { 
     T
+    | where (optional)
     | where EventSchema == 'NetworkSession' 
     | invoke ASIM_ProjectNetworkSessionOptional()
-    ;
+    };
     let Authentication =
     T
     | where EventSchema == 'Authentication'
     | invoke ASIM_ProjectAuthenticationSchema()
     ;
-    let AuthenticationOptional =
+    let AuthenticationOptional = (optional:bool=false) {
     T
+    | where (optional)
     | where EventSchema == 'Authentication'
     | invoke ASIM_ProjectAuthenticationOptional()
-    ;
+    };
     let AuditEvent =
     T
     | where EventSchema == 'AuditEvent'
     | invoke ASIM_ProjectAuditEventSchema()
     ;
-    let AuditEventOptional =
+    let AuditEventOptional = (optional:bool=false) {
     T
+    | where (optional)
     | where EventSchema == 'AuditEvent'
     | invoke ASIM_ProjectAuditEventOptional()
-    ;
+    };
     let FileEvent =
     T
     | where EventSchema == 'FileEvent'
     | invoke ASIM_ProjectFileEventSchema()
     ;
-    let FileEventOptional =
+    let FileEventOptional = (optional:bool=false) {
     T
+    | where (optional)
     | where EventSchema == 'FileEvent'
     | invoke ASIM_ProjectFileEventOptional()
-    ;
+    };
     let ProcessEvent =
     T
     | where EventSchema == 'ProcessEvent'
     | invoke ASIM_ProjectProcessEventSchema()
     ;
-    let ProcessEventOptional =
+    let ProcessEventOptional = (optional:bool=false) {
     T
+    | where (optional)
     | where EventSchema == 'ProcessEvent'
     | invoke ASIM_ProjectProcessEventOptional()
-    ;
+    };
     let RegistryEvent =
     T
     | where EventSchema == 'RegistryEvent'
     | invoke ASIM_ProjectRegistryEventSchema()
     ;
-    let RegistryEventOptional =
+    let RegistryEventOptional = (optional:bool=false) {
     T
+    | where (optional)
     | where EventSchema == 'RegistryEvent'
     | invoke ASIM_ProjectRegistryEventOptional()
-    ;
+    };
     let WebSession =
     T
     | where EventSchema == 'WebSession'
     | invoke ASIM_ProjectWebSessionSchema()
     ;
-    let WebSessionOptional =
+    let WebSessionOptional = (optional:bool=false) {
     T
+    | where (optional)
     | where EventSchema == 'WebSession'
     | invoke ASIM_ProjectWebSessionOptional()
-    ;
+    };
     let Dns =
     T
     | where EventSchema == 'Dns'
     | invoke ASIM_ProjectDnsSchema()
     ;
-    let DnsOptional =
+    let DnsOptional = (optional:bool=false) {
     T
+    | where (optional)
     | where EventSchema == 'Dns'
     | invoke ASIM_ProjectDnsOptional()
-    ;
+    };
     union isfuzzy= false 
         (NetworkSession | join kind=inner NetworkSessionOptional on $left._ItemId == $right._ItemId)
       , (Authentication | join kind=inner AuthenticationOptional on $left._ItemId == $right._ItemId)
@@ -103,7 +111,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       , (WebSession | join kind=inner WebSessionOptional on $left._ItemId == $right._ItemId)
       , (Dns | join kind=inner DnsOptional on $left._ItemId == $right._ItemId)
       | project-away _ItemId*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string)'
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string, optional:bool)'
     functionAlias: 'ASIM_ProjectSchema'
   }
 }
