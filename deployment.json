@@ -31,11 +31,45 @@
       {
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2020-10-01",
+        "name": "linkedASIM_AuditEventSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectAuditEventOptional.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
         "name": "linkedASIM_AuthenticationSchema",
         "properties": {
           "mode": "Incremental",
           "templateLink": {
             "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectAuthenticationSchema.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
+        "name": "linkedASIM_AuthenticationSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectAuthenticationOptional.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -65,11 +99,45 @@
       {
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2020-10-01",
+        "name": "linkedASIM_DnsSchemaSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectDnsOptional.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
         "name": "linkedASIM_FileEventSchema",
         "properties": {
           "mode": "Incremental",
           "templateLink": {
             "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectFileEventSchema.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
+        "name": "linkedASIM_FileEventSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectFileEventOptional.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
@@ -133,6 +201,23 @@
       {
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2020-10-01",
+        "name": "linkedASIM_ProcessEventSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectProcessEventOptional.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
         "name": "linkedASIM_RegistryEventSchema",
         "properties": {
           "mode": "Incremental",
@@ -150,11 +235,45 @@
       {
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2020-10-01",
+        "name": "linkedASIM_RegistryEventSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectRegistryEventOptional.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
         "name": "linkedASIM_WebSessionSchema",
         "properties": {
           "mode": "Incremental",
           "templateLink": {
             "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectWebSessionSchema.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
+        "name": "linkedASIM_WebSessionSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectWebSessionOptional.json",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
