@@ -26,8 +26,6 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     T
     | where EventSchema == 'NetworkSession' 
     | invoke ASIM_ProjectNetworkSessionOptional()
-    union isfuzzy= false 
-    (NetworkSession | join kind=inner NetworkSessionOptional on $left._ItemId == $right._ItemId)
     ;
     // let Authentication =
     // T
@@ -64,15 +62,15 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     // | where EventSchema == 'Dns'
     // | invoke ASIM_ProjectDnsSchema()
     // ;
-    // union isfuzzy= false 
-    // (NetworkSession | join kind=inner NetworkSessionOptional on $left._ItemId == $right._ItemId)
-    // | project-away _ItemId*
+    union isfuzzy= false 
+    (NetworkSession | join kind=inner NetworkSessionOptional on $left._ItemId == $right._ItemId)
+    | project-away _ItemId*
       // , Authentication
       // , AuditEvent
       // , FileEvent
       // , ProcessEvent
       // , RegistryEvent
-      // , WebSession
+      , WebSession
       // , Dns'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string)'
     functionAlias: 'ASIM_ProjectSchema'
