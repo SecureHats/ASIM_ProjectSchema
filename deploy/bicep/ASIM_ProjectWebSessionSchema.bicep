@@ -1,13 +1,10 @@
-@description('The region of the selected workspace. The default value will use the Region selection above.')
-param WorkspaceRegion string = resourceGroup().location
-
 @description('The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group.')
-param Workspace string
+param Workspace string = 'gsia002-it-weu-a01-stl-oms01'
 
-resource Workspace_resource 'Microsoft.OperationalInsights/workspaces@2017-03-15-preview' = {
+resource Workspace_resource 'Microsoft.OperationalInsights/workspaces@2017-03-15-preview' existing = {
   name: Workspace
-  location: WorkspaceRegion
 }
+
 
 resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/workspaces/savedSearches@2020-08-01' = {
   parent: Workspace_resource
