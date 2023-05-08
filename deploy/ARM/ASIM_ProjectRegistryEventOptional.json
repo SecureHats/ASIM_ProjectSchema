@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.15.31.15270",
-      "templateHash": "6988320170966018344"
+      "templateHash": "12538012512673361961"
     }
   },
   "parameters": {
@@ -26,7 +26,7 @@
         "version": 1,
         "category": "ASIM",
         "displayName": "ASIM_ProjectWebSessionOptional",
-        "query": "T\r\n    | project\r\n        // Registry Event Optional Fields\r\n        , tostring(column_ifexists('DvcScope', ''))\r\n        , tostring(column_ifexists('DvcScopeId', ''))\r\n        , tostring(column_ifexists('ActingProcessGuid', ''))\r\n        , tostring(column_ifexists('ActingProcessName', ''))\r\n        , tostring(column_ifexists('ActorSessionId', ''))\r\n        , todynamic(column_ifexists('AdditionalFields', ''))\r\n        , tostring(column_ifexists('DstDescription', ''))\r\n        , tostring(column_ifexists('DvcDescription', ''))\r\n        , tostring(column_ifexists('DvcId', ''))\r\n        , tostring(column_ifexists('DvcMacAddr', ''))\r\n        , tostring(column_ifexists('DvcOs', ''))\r\n        , tostring(column_ifexists('DvcOsVersion', ''))\r\n        , tostring(column_ifexists('EventMessage', ''))\r\n        , tostring(column_ifexists('EventOriginalSubType', ''))\r\n        , tostring(column_ifexists('EventOriginalType', ''))\r\n        , tostring(column_ifexists('EventOriginalUid', ''))\r\n        , tostring(column_ifexists('EventOwner', ''))\r\n        , tostring(column_ifexists('EventProductVersion', ''))\r\n        , tostring(column_ifexists('EventReportUrl', ''))\r\n        , tostring(column_ifexists('ParentProcessGuid', ''))\r\n        , tostring(column_ifexists('ParentProcessName', ''))\r\n        , tostring(column_ifexists('SrcDescription', ''))\r\n        , tostring(_ItemId)\r\n    | project-away Column*",
+        "query": "T\r\n    | project\r\n        // Registry Event Optional Fields\r\n          tostring(column_ifexists('DvcScope', ''))\r\n        , tostring(column_ifexists('DvcScopeId', ''))\r\n        , tostring(column_ifexists('ActingProcessGuid', ''))\r\n        , tostring(column_ifexists('ActingProcessName', ''))\r\n        , tostring(column_ifexists('ActorSessionId', ''))\r\n        , todynamic(column_ifexists('AdditionalFields', ''))\r\n        , tostring(column_ifexists('DstDescription', ''))\r\n        , tostring(column_ifexists('DvcDescription', ''))\r\n        , tostring(column_ifexists('DvcId', ''))\r\n        , tostring(column_ifexists('DvcMacAddr', ''))\r\n        , tostring(column_ifexists('DvcOs', ''))\r\n        , tostring(column_ifexists('DvcOsVersion', ''))\r\n        , tostring(column_ifexists('EventMessage', ''))\r\n        , tostring(column_ifexists('EventOriginalSubType', ''))\r\n        , tostring(column_ifexists('EventOriginalType', ''))\r\n        , tostring(column_ifexists('EventOriginalUid', ''))\r\n        , tostring(column_ifexists('EventOwner', ''))\r\n        , tostring(column_ifexists('EventProductVersion', ''))\r\n        , tostring(column_ifexists('EventReportUrl', ''))\r\n        , tostring(column_ifexists('ParentProcessGuid', ''))\r\n        , tostring(column_ifexists('ParentProcessName', ''))\r\n        , tostring(column_ifexists('SrcDescription', ''))\r\n        , tostring(_ItemId)\r\n    | project-away Column*",
         "functionParameters": "T:(TimeGenerated:datetime, _ItemId:string)",
         "functionAlias": "ASIM_ProjectRegistryEventOptional"
       }
