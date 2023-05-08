@@ -22,12 +22,12 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     | where EventSchema == 'NetworkSession'
     | invoke ASIM_ProjectNetworkSessionSchema()
     ;
-    let NetworkSessionOptional = (disabled:bool=false) {
+    let NetworkSessionOptional = 
     T
     | where not(disabled)
     | where EventSchema == 'NetworkSession' 
     | invoke ASIM_ProjectNetworkSessionOptional()
-    };
+    ;
     // let Authentication =
     // T
     // | where EventSchema == 'Authentication'
@@ -73,7 +73,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       // , RegistryEvent
       // , WebSession
       // , Dns'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string, disabled:bool)'
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string)'
     functionAlias: 'ASIM_ProjectSchema'
   }
 }
