@@ -29,7 +29,7 @@ Just add the following line to the end of your parser, and you are good to go.<b
 
 ```js
 
-| invoke ASIM_ProjectSchema
+| invoke ASIM_ProjectSchema()
 
 ```
 
