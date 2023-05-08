@@ -16,7 +16,7 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
     query: '''T
     | project
         // Registry Event Optional Fields
-        , tostring(column_ifexists('DvcScope', ''))
+          tostring(column_ifexists('DvcScope', ''))
         , tostring(column_ifexists('DvcScopeId', ''))
         , tostring(column_ifexists('ActingProcessGuid', ''))
         , tostring(column_ifexists('ActingProcessName', ''))
