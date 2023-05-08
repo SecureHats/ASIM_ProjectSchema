@@ -60,14 +60,14 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     ;
     union isfuzzy= false 
     (NetworkSession | join kind=inner NetworkSessionOptional on $left._ItemId == $right._ItemId)
-    | project-away _ItemId*
       , Authentication
       , AuditEvent
       , FileEvent
       , ProcessEvent
       , RegistryEvent
       , WebSession
-      , Dns'''
+      , Dns
+      | project-away _ItemId*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string)'
     functionAlias: 'ASIM_ProjectSchema'
   }
