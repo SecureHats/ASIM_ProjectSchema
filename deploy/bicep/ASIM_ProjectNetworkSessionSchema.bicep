@@ -15,7 +15,6 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
     category: 'ASIM'
     functionAlias: 'ASIM_ProjectNetworkSessionSchema'
     query: '''
-    let Parser =
     T
     | project
         // Common Mandatory Fields
@@ -51,15 +50,6 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
-    ;
-    let OptionalFields = (optional:bool) {
-      T
-      | where (optional)
-      | invoke ASIM_ProjectNetworkSessionOptional()
-      | project-away Column*
-      };
-      union isfuzzy = false
-      (Parser | join kind=leftouter OptionalFields(optional) on $left._ItemId == $right._ItemId)
     '''
     version: 1
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'

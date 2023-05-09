@@ -15,8 +15,15 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     query: '''
     let NetworkSession =
     T
+    | where not(optional)
     | where EventSchema == 'NetworkSession'
-    | invoke ASIM_ProjectNetworkSessionSchema(optional)
+    | invoke ASIM_ProjectNetworkSessionSchema()
+    ;
+    let NetworkSessionOptional =
+    T
+    | where (optional)
+    | where EventSchema == 'NetworkSession'
+    | invoke ASIM_ProjectNetworkSessionOptional()
     ;
     let Authentication =
     T
@@ -45,8 +52,15 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     ;
     let WebSession =
     T
+    | where not(optional)
     | where EventSchema == 'WebSession'
-    | invoke ASIM_ProjectWebSessionSchema(optional)
+    | invoke ASIM_ProjectWebSessionSchema()
+    ;
+    let WebSessionOptional =
+    T
+    | where (optional)
+    | where EventSchema == 'WebSession'
+    | invoke ASIM_ProjectWebSessionSchemaOptional
     ;
     let Dns =
     T
@@ -55,12 +69,14 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     ;
     union isfuzzy = false 
         NetworkSession
-      , Authentication
-      , AuditEvent
-      , FileEvent
-      , ProcessEvent
-      , RegistryEvent
+      , NetworkSessionOptional
+      // , Authentication
+      // , AuditEvent
+      // , FileEvent
+      // , ProcessEvent
+      // , RegistryEvent
       , WebSession
+      , WebSessionOptional
       , Dns
     | project-away _ItemId*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string), optional:bool=false'
