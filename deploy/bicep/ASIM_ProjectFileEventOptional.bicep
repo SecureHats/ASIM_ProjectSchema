@@ -75,7 +75,6 @@ resource Workspace_ASIM_ProjectFileEventOptional 'Microsoft.OperationalInsights/
         , tostring(column_ifexists('DvcOsVersion', ''))
         , tostring(column_ifexists('DvcScopeId', ''))
         , tostring(column_ifexists('DvcZone', ''))
-        , toint(column_ifexists('EventCount', ''))
         , tostring(column_ifexists('EventMessage', ''))
         , tostring(column_ifexists('EventOriginalResultDetails', ''))
         , tostring(column_ifexists('EventOriginalSeverity', ''))
