@@ -16,8 +16,40 @@ resource Workspace_ASIM_ProjectAuditEventOptional 'Microsoft.OperationalInsights
     query: '''
     T
     | project
+        // Common Mandatory Fields
+          todatetime(TimeGenerated)
+        , toint(column_ifexists('EventCount', ''))
+        , todatetime(column_ifexists('EventStartTime', ''))
+        , todatetime(column_ifexists('EventEndTime', ''))
+        , tostring(column_ifexists('EventType', ''))
+        , tostring(column_ifexists('EventResult', ''))
+        , tostring(column_ifexists('EventProduct', ''))
+        , tostring(column_ifexists('EventVendor', ''))
+        , tostring(column_ifexists('EventSchema', ''))
+        , tostring(column_ifexists('EventSchemaVersion', ''))
+        , tostring(column_ifexists('EventSeverity', ''))
+        , tostring(column_ifexists('Dvc', ''))
+        // Common Recommended Fields
+        , tostring(column_ifexists('EventResultDetails', ''))
+        , tostring(column_ifexists('EventUid', ''))
+        , tostring(column_ifexists('DvcIpAddr', ''))
+        , tostring(column_ifexists('DvcHostname', ''))
+        , tostring(column_ifexists('DvcDomain', ''))
+        // AuditEvent Mandatory Fields
+        , tostring(column_ifexists('Operation', ''))
+        // AuditEvent Recommended Fields
+        , tostring(column_ifexists('ActorUsername', ''))
+        , tostring(column_ifexists('DvcAction', ''))
+        , tostring(column_ifexists('Dst', ''))
+        , tostring(column_ifexists('NewValue', ''))
+        , tostring(column_ifexists('Object', ''))
+        , tostring(column_ifexists('ObjectId', ''))
+        , tostring(column_ifexists('Src', ''))
+        , tostring(column_ifexists('SrcIpAddr', ''))
+        , tostring(column_ifexists('TargetIpAddr', ''))
+        , tostring(column_ifexists('TargetHostName', ''))    
         // Audit Event Optional Fields
-          tostring(column_ifexists('ActingAppId', ''))
+        , tostring(column_ifexists('ActingAppId', ''))
         , tostring(column_ifexists('ActingAppName', ''))
         , tostring(column_ifexists('ActingAppType', ''))
         , tostring(column_ifexists('ActorOriginalUserType', ''))

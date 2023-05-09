@@ -49,7 +49,7 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('_ItemId', ''))
         // NetworkSession Optional Fields
-          tostring(column_ifexists('DstScopeId', ''))
+        , tostring(column_ifexists('DstScopeId', ''))
         , tostring(column_ifexists('DvcScope', ''))
         , tostring(column_ifexists('DvcScopeId', ''))
         , todynamic(column_ifexists('AdditionalFields', ''))

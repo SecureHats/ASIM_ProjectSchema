@@ -16,8 +16,36 @@ resource Workspace_ASIM_ProjectFileEventOptional 'Microsoft.OperationalInsights/
     query: '''
     T
     | project
+        // Common Mandatory Fields
+          todatetime(TimeGenerated)
+        , toint(column_ifexists('EventCount', ''))
+        , todatetime(column_ifexists('EventStartTime', ''))
+        , todatetime(column_ifexists('EventEndTime', ''))
+        , tostring(column_ifexists('EventType', ''))
+        , tostring(column_ifexists('EventResult', ''))
+        , tostring(column_ifexists('EventProduct', ''))
+        , tostring(column_ifexists('EventVendor', ''))
+        , tostring(column_ifexists('EventSchema', ''))
+        , tostring(column_ifexists('EventSchemaVersion', ''))
+        , tostring(column_ifexists('EventSeverity', ''))
+        , tostring(column_ifexists('Dvc', ''))
+        // Common Recommended Fields
+        , tostring(column_ifexists('EventResultDetails', ''))
+        , tostring(column_ifexists('EventUid', ''))
+        , tostring(column_ifexists('DvcIpAddr', ''))
+        , tostring(column_ifexists('DvcHostname', ''))
+        , tostring(column_ifexists('DvcDomain', ''))
+        // FileEvent Mandatory Fields
+        , tostring(column_ifexists('ActorUsername', ''))
+        , tostring(column_ifexists('TargetFilePathType', ''))
+        // FileEvent Recommended Fields
+        , tostring(column_ifexists('ActorUserId', ''))
+        , tostring(column_ifexists('DvcAction', ''))
+        , tostring(column_ifexists('SrcFilePathType', ''))
+        , tostring(column_ifexists('SrcFilePath', ''))
+        , tostring(column_ifexists('SrcIpAddr', ''))    
         // File Event Optional Fields
-          tostring(column_ifexists('ActorScope', ''))
+        , tostring(column_ifexists('ActorScope', ''))
         , tostring(column_ifexists('ActorScopeId', ''))
         , tostring(column_ifexists('DvcScope', ''))
         , tostring(column_ifexists('ActingAppId', ''))

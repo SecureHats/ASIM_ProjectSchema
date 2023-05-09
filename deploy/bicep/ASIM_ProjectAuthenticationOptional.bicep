@@ -16,8 +16,34 @@ resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsi
     query: '''
     T
     | project
+        // Common Mandatory Fields
+          todatetime(TimeGenerated)
+        , toint(column_ifexists('EventCount', ''))
+        , todatetime(column_ifexists('EventStartTime', ''))
+        , todatetime(column_ifexists('EventEndTime', ''))
+        , tostring(column_ifexists('EventType', ''))
+        , tostring(column_ifexists('EventResult', ''))
+        , tostring(column_ifexists('EventProduct', ''))
+        , tostring(column_ifexists('EventVendor', ''))
+        , tostring(column_ifexists('EventSchema', ''))
+        , tostring(column_ifexists('EventSchemaVersion', ''))
+        , tostring(column_ifexists('EventSeverity', ''))
+        , tostring(column_ifexists('Dvc', ''))
+        // Common Recommended Fields
+        , tostring(column_ifexists('EventResultDetails', ''))
+        , tostring(column_ifexists('EventUid', ''))
+        , tostring(column_ifexists('DvcIpAddr', ''))
+        , tostring(column_ifexists('DvcHostname', ''))
+        , tostring(column_ifexists('DvcDomain', ''))
+        // Authentication Schema Mandatory Fields
+        // Authentication Schema Recommended Fields
+        , tostring(column_ifexists('Dst', ''))
+        , tostring(column_ifexists('Src', ''))        
+        , tostring(column_ifexists('SrcIpAddr', ''))
+        , tostring(column_ifexists('TargetHostname', ''))
+        , tostring(column_ifexists('TargetDomain', ''))    
         // Authentication Optional Fields
-          tostring(column_ifexists('ActingAppId', ''))
+        , tostring(column_ifexists('ActingAppId', ''))
         , tostring(column_ifexists('ActingAppName', ''))
         , tostring(column_ifexists('ActingAppType', ''))
         , tostring(column_ifexists('ActorOriginalUserType', ''))

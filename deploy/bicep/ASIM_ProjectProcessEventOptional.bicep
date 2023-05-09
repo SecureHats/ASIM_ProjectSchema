@@ -16,8 +16,40 @@ resource Workspace_ASIM_ProjectProcessEventOptional 'Microsoft.OperationalInsigh
     query: '''
     T
     | project
+        // Common Mandatory Fields
+          todatetime(TimeGenerated)
+        , toint(column_ifexists('EventCount', ''))
+        , todatetime(column_ifexists('EventStartTime', ''))
+        , todatetime(column_ifexists('EventEndTime', ''))
+        , tostring(column_ifexists('EventType', ''))
+        , tostring(column_ifexists('EventResult', ''))
+        , tostring(column_ifexists('EventProduct', ''))
+        , tostring(column_ifexists('EventVendor', ''))
+        , tostring(column_ifexists('EventSchema', ''))
+        , tostring(column_ifexists('EventSchemaVersion', ''))
+        , tostring(column_ifexists('EventSeverity', ''))
+        , tostring(column_ifexists('Dvc', ''))
+        // Common Recommended Fields
+        , tostring(column_ifexists('EventResultDetails', ''))
+        , tostring(column_ifexists('EventUid', ''))
+        , tostring(column_ifexists('DvcIpAddr', ''))
+        , tostring(column_ifexists('DvcHostname', ''))
+        , tostring(column_ifexists('DvcDomain', ''))
+        // ProcessEvent Mandatory Fields
+        , tostring(column_ifexists('ActingProcessId', ''))
+        , tostring(column_ifexists('ActorUsername', ''))
+        , tostring(column_ifexists('TargetProcessCommandLine', ''))
+        , tostring(column_ifexists('TargetProcessId', ''))
+        , tostring(column_ifexists('TargetProcessName', ''))
+        , tostring(column_ifexists('TargetUsername', ''))
+        // ProcessEvent Recommended Fields
+        , tostring(column_ifexists('ActorUserId', ''))
+        , tostring(column_ifexists('Hash', ''))
+        , tostring(column_ifexists('ParentProcessId', ''))
+        , tostring(column_ifexists('TargetProcessCreationTime', ''))
+        , tostring(column_ifexists('TargetUserId', ''))    
         // Process Event Optional Fields
-          tostring(column_ifexists('DvcScope', ''))
+        ,  tostring(column_ifexists('DvcScope', ''))
         , tostring(column_ifexists('DvcScopeId', ''))
         , tostring(column_ifexists('ActingProcessCommandLine', ''))
         , todatetime(column_ifexists('ActingProcessCreationTime', ''))
