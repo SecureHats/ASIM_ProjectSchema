@@ -16,43 +16,43 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     let NetworkSession =
     T
     | where EventSchema == 'NetworkSession'
-    | invoke ASIM_ProjectNetworkSessionSchema()
+    | invoke ASIM_ProjectNetworkSessionSchema(optional)
     ;
-    // let Authentication =
-    // T
-    // | where EventSchema == 'Authentication'
-    // | invoke ASIM_ProjectAuthenticationSchema()
-    // ;
-    // let AuditEvent =
-    // T
-    // | where EventSchema == 'AuditEvent'
-    // | invoke ASIM_ProjectAuditEventSchema()
-    // ;
-    // let FileEvent =
-    // T
-    // | where EventSchema == 'FileEvent'
-    // | invoke ASIM_ProjectFileEventSchema()
-    // ;
-    // let ProcessEvent =
-    // T
-    // | where EventSchema == 'ProcessEvent'
-    // | invoke ASIM_ProjectProcessEventSchema()
-    // ;
-    // let RegistryEvent =
-    // T
-    // | where EventSchema == 'RegistryEvent'
-    // | invoke ASIM_ProjectRegistryEventSchema()
-    // ;
+    let Authentication =
+    T
+    | where EventSchema == 'Authentication'
+    | invoke ASIM_ProjectAuthenticationSchema(optional)
+    ;
+    let AuditEvent =
+    T
+    | where EventSchema == 'AuditEvent'
+    | invoke ASIM_ProjectAuditEventSchema(optional)
+    ;
+    let FileEvent =
+    T
+    | where EventSchema == 'FileEvent'
+    | invoke ASIM_ProjectFileEventSchema(optional)
+    ;
+    let ProcessEvent =
+    T
+    | where EventSchema == 'ProcessEvent'
+    | invoke ASIM_ProjectProcessEventSchema(optional)
+    ;
+    let RegistryEvent =
+    T
+    | where EventSchema == 'RegistryEvent'
+    | invoke ASIM_ProjectRegistryEventSchema(optional)
+    ;
     let WebSession =
     T
     | where EventSchema == 'WebSession'
     | invoke ASIM_ProjectWebSessionSchema(optional)
     ;
-    // let Dns =
-    // T
-    // | where EventSchema == 'Dns'
-    // | invoke ASIM_ProjectDnsSchema()
-    // ;
+    let Dns =
+    T
+    | where EventSchema == 'Dns'
+    | invoke ASIM_ProjectDnsSchema()
+    ;
     union isfuzzy = false 
         NetworkSession
       , Authentication
