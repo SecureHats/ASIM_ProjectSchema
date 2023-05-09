@@ -89,7 +89,6 @@ resource Workspace_ASIM_ProjectDnsOptional 'Microsoft.OperationalInsights/worksp
         , tostring(column_ifexists('EventOwner', ''))
         , tostring(column_ifexists('EventProductVersion', ''))
         , tostring(column_ifexists('EventReportUrl', ''))
-        , tostring(column_ifexists('EventSeverity', ''))
         , tostring(column_ifexists('EventSubType', ''))
         , tostring(column_ifexists('NetworkProtocol', ''))
         , tostring(column_ifexists('NetworkProtocolVersion', ''))

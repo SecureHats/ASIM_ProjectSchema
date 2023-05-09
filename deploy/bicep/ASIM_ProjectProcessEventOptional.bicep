@@ -98,8 +98,6 @@ resource Workspace_ASIM_ProjectProcessEventOptional 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('EventOwner', ''))
         , tostring(column_ifexists('EventProductVersion', ''))
         , tostring(column_ifexists('EventReportUrl', ''))
-        , tostring(column_ifexists('EventResultDetails', ''))
-        , tostring(column_ifexists('EventSeverity', ''))
         , tostring(column_ifexists('EventSubType', ''))
         , todatetime(column_ifexists('ParentProcessCreationTime', ''))
         , tostring(column_ifexists('ParentProcessFileCompany', ''))
