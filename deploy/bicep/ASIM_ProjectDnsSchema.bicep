@@ -12,6 +12,7 @@ resource Workspace_ASIM_ProjectDnsSchema 'Microsoft.OperationalInsights/workspac
     category: 'ASIM'
     displayName: 'ASIM_ProjectDnsSchema'
     query: '''
+    let Parser =
     T
     | project
         // Common Mandatory Fields
@@ -42,8 +43,18 @@ resource Workspace_ASIM_ProjectDnsSchema 'Microsoft.OperationalInsights/workspac
         , tostring(column_ifexists('DnsQueryTypeName', ''))
         , tostring(column_ifexists('TransactionIdHex', ''))
         , tostring(_ItemId)
-    | project-away Column*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
+    | project-away Column*
+    ;
+    let OptionalFields = (optional:bool) {
+      T
+      | where (optional)
+      | invoke ASIM_ProjectDnsOptional()
+      | project-away Column*
+      };
+      union isfuzzy = false
+      (Parser | join kind=leftouter OptionalFields(optional) on $left._ItemId == $right._ItemId)
+    '''
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
     functionAlias: 'ASIM_ProjectDnsSchema'
   }
 }

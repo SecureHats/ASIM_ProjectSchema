@@ -14,6 +14,7 @@ resource Workspace_ASIM_ProjectProcessEventSchema 'Microsoft.OperationalInsights
     displayName: 'ASIM_ProjectProcessEventSchema'
     etag: '*'
     query: '''
+    let Parser =
     T
     | project
         // Common Mandatory Fields
@@ -49,8 +50,18 @@ resource Workspace_ASIM_ProjectProcessEventSchema 'Microsoft.OperationalInsights
         , tostring(column_ifexists('TargetProcessCreationTime', ''))
         , tostring(column_ifexists('TargetUserId', ''))
         , tostring(_ItemId)
-    | project-away Column*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
+    | project-away Column*
+    ;
+    let OptionalFields = (optional:bool) {
+      T
+      | where (optional)
+      | invoke ASIM_ProjectProcessEventOptional()
+      | project-away Column*
+      };
+      union isfuzzy = false
+      (Parser | join kind=leftouter OptionalFields(optional) on $left._ItemId == $right._ItemId)
+    '''
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
     functionAlias: 'ASIM_ProjectProcessEventSchema'
   }
 }

@@ -14,6 +14,7 @@ resource Workspace_ASIM_ProjectAuthenticationSchema 'Microsoft.OperationalInsigh
     displayName: 'ASIM_ProjectAuthenticationSchema'
     etag: '*'
     query: '''
+    let Parser =
     T
     | project
         // Common Mandatory Fields
@@ -43,8 +44,18 @@ resource Workspace_ASIM_ProjectAuthenticationSchema 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('TargetHostname', ''))
         , tostring(column_ifexists('TargetDomain', ''))
         , tostring(_ItemId)
-    | project-away Column*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
+    | project-away Column*
+    ;
+    let OptionalFields = (optional:bool) {
+      T
+      | where (optional)
+      | invoke ASIM_ProjectAuthenticationOptional()
+      | project-away Column*
+      };
+      union isfuzzy = false
+      (Parser | join kind=leftouter OptionalFields(optional) on $left._ItemId == $right._ItemId)
+    '''
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
     FunctionAlias: 'ASIM_ProjectAuthenticationSchema'
   }
 }

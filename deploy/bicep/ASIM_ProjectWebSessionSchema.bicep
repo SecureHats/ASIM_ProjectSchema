@@ -13,7 +13,8 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
     version: 1
     category: 'ASIM'
     displayName: 'ASIM_ProjectWebSessionSchema'
-    query: '''T
+    query: '''let Parser =
+    T
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
@@ -45,8 +46,18 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('SrcHostname', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(_ItemId)
-    | project-away Column*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
+    | project-away Column*
+    ;
+    let OptionalFields = (optional:bool) {
+    T
+    | where (optional)
+    | invoke ASIM_ProjectWebSessionOptional()
+    | project-away Column*
+    };
+    union isfuzzy = false
+    (Parser | join kind=leftouter OptionalFields(optional) on $left._ItemId == $right._ItemId)
+    '''
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
     functionAlias: 'ASIM_ProjectWebSessionSchema'
   }
 }

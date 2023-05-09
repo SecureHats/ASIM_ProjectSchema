@@ -14,6 +14,7 @@ resource Workspace_ASIM_ProjectFileEventSchema 'Microsoft.OperationalInsights/wo
     displayName: 'ASIM_ProjectFileEventSchema'
     etag: '*'
     query: '''
+    let Parser =
     T
     | project
         // Common Mandatory Fields
@@ -45,8 +46,18 @@ resource Workspace_ASIM_ProjectFileEventSchema 'Microsoft.OperationalInsights/wo
         , tostring(column_ifexists('SrcFilePath', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(_ItemId)
-    | project-away Column*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
+    | project-away Column*
+    ;
+    let OptionalFields = (optional:bool) {
+      T
+      | where (optional)
+      | invoke ASIM_ProjectFileEventOptional()
+      | project-away Column*
+      };
+      union isfuzzy = false
+      (Parser | join kind=leftouter OptionalFields(optional) on $left._ItemId == $right._ItemId)
+    '''
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
     functionAlias: 'ASIM_ProjectFileEventSchema'
   }
 }

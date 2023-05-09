@@ -14,6 +14,7 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
     displayName: 'ASIM_ProjectAuditEventSchema'
     etag: '*'
     query: '''
+    let Parser =
     T
     | project
         // Common Mandatory Fields
@@ -49,8 +50,18 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('TargetIpAddr', ''))
         , tostring(column_ifexists('TargetHostName', ''))
         , tostring(_ItemId)
-    | project-away Column*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
+    | project-away Column*
+    ;
+    let OptionalFields = (optional:bool) {
+      T
+      | where (optional)
+      | invoke ASIM_ProjectAuditEventOptional()
+      | project-away Column*
+      };
+      union isfuzzy = false
+      (Parser | join kind=leftouter OptionalFields(optional) on $left._ItemId == $right._ItemId)
+    '''
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
     FunctionAlias: 'ASIM_ProjectAuditEventSchema'
   }
 }
