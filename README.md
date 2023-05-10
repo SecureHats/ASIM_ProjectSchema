@@ -25,11 +25,46 @@ Because you don't have to think about the fields you need to either `project` or
 ## How to use
 
 The Project Schema function is extremely easy to use!<br>
+There are two ways to use the functions. You can either let the base function automatically deside what schema to use based on the ```EventSchema``` column or manually specify the desired schema.
+
 Just add the following line to the end of your parser, and you are good to go.<br>
 
+## Auto Select schema
+
+### Example 1
+
+> only project ```Mandatory``` and ```Recommended``` ASIM columns 
 ```js
 
 | invoke ASIM_ProjectSchema()
+
+```
+
+### Example 2
+> Project **ALL** ```Mandatory```, ```Recommended``` and ```Optional``` ASIM columns 
+```js
+
+| invoke ASIM_ProjectSchema(optional=true)
+
+```
+
+## Manual Select NetworkSession schema
+
+### Example 3
+
+> only project ```Mandatory``` and ```Recommended``` ASIM columns 
+```js
+
+| invoke ASIM_ProjectNetworkSessionSchema()
+
+```
+
+### Example 4
+
+> Project **ALL** ```Mandatory```, ```Recommended``` and ```Optional``` ASIM columns
+```js
+
+| invoke ASIM_ProjectNetworkSessionOptional()
 
 ```
 
@@ -37,6 +72,5 @@ Just add the following line to the end of your parser, and you are good to go.<b
 
 - The `ASIM_ProjectSchema` function will evaluate the value _*Mandatory*_ `EventSchema` column<br>
 - Based on the value in the `EventSchema` column the appropriate _project function_ will be called
-- The dedicated Schema function will project the `Mandatory`, `Recommended` and `AdditionalFields` columns related to the specific schema. <br>
+- The dedicated Schema function will project the `Mandatory`, `Recommended` and optionally the `Optional` columns related to the specific schema. <br>
 
-> Optional fields from the ASIM schema will not be projected unless the are added to the `AdditionalFields` column.
