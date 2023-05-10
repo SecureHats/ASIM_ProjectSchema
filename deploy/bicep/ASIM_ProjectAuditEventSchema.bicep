@@ -49,7 +49,7 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('TargetIpAddr', ''))
         , tostring(column_ifexists('TargetHostname', ''))
-        , tostring(column_ifexists('_ItemId', '')
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
     ;
     let OptionalFields = (optional:bool) {
