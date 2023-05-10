@@ -1,5 +1,5 @@
 @description('The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group.')
-param Workspace string = 'gsia002-it-weu-a01-stl-oms01'
+param Workspace string = ''
 
 resource Workspace_resource 'Microsoft.OperationalInsights/workspaces@2017-03-15-preview' existing = {
   name: Workspace

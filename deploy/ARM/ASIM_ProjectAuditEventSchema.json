@@ -11,7 +11,7 @@
   "parameters": {
     "Workspace": {
       "type": "string",
-      "defaultValue": "gsia002-it-weu-a01-stl-oms01",
+      "defaultValue": "",
       "metadata": {
         "description": "The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group."
       }
