@@ -139,7 +139,7 @@ resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsi
         , tostring(column_ifexists('TargetOriginalRiskLevel', ''))
         , toint(column_ifexists('TargetRiskLevel', ''))
         , tostring(column_ifexists('ThreatIpAddr', ''))
-        , tostring(column_ifexists('_ItemId', '')
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     FunctionAlias: 'ASIM_ProjectAuthenticationOptional'

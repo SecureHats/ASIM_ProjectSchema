@@ -44,7 +44,7 @@ resource Workspace_ASIM_ProjectAuthenticationSchema 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('TargetDomain', ''))
         , tostring(column_ifexists('TargetHostname', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
     ;
     let OptionalFields = (optional:bool) {

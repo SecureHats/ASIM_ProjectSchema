@@ -168,7 +168,7 @@ resource Workspace_ASIM_ProjectWebSessionOptional 'Microsoft.OperationalInsights
         , tostring(column_ifexists('Url', ''))
         , tostring(column_ifexists('UrlCategory', ''))
         , tostring(column_ifexists('UrlOriginal', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectWebSessionOptional'

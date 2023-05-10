@@ -71,7 +71,7 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
         , tostring(column_ifexists('ParentProcessGuid', ''))
         , tostring(column_ifexists('ParentProcessName', ''))
         , tostring(column_ifexists('SrcDescription', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectRegistryEventOptional'

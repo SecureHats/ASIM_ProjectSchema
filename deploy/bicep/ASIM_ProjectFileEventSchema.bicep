@@ -45,7 +45,7 @@ resource Workspace_ASIM_ProjectFileEventSchema 'Microsoft.OperationalInsights/wo
         , tostring(column_ifexists('SrcFilePath', ''))
         , tostring(column_ifexists('SrcFilePathType', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
     ;
     let OptionalFields = (optional:bool) {

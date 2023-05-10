@@ -44,7 +44,7 @@ resource Workspace_ASIM_ProjectDnsSchema 'Microsoft.OperationalInsights/workspac
         , tostring(column_ifexists('SrcHostname', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('TransactionIdHex', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
     ;
     let OptionalFields = (optional:bool) {

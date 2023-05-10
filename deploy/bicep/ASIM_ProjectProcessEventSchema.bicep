@@ -50,7 +50,7 @@ resource Workspace_ASIM_ProjectProcessEventSchema 'Microsoft.OperationalInsights
         , tostring(column_ifexists('ParentProcessId', ''))
         , todatetime(column_ifexists('TargetProcessCreationTime', ''))
         , tostring(column_ifexists('TargetUserId', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
     ;
     let OptionalFields = (optional:bool) {

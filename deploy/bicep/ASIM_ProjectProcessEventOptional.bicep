@@ -145,7 +145,7 @@ resource Workspace_ASIM_ProjectProcessEventOptional 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('TargetOriginalUserType', ''))
         , tostring(column_ifexists('TargetScopeId', ''))
         , tostring(column_ifexists('TargetScope', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectProcessEventOptional'

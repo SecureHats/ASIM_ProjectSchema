@@ -137,7 +137,7 @@ resource Workspace_ASIM_ProjectFileEventOptional 'Microsoft.OperationalInsights/
         , toint(column_ifexists('ThreatRiskLevel', ''))
         , tostring(column_ifexists('SrcDvcScope', ''))
         , tostring(column_ifexists('SrcDvcScopeId', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectFileEventOptional'

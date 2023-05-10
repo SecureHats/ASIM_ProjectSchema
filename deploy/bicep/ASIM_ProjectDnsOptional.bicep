@@ -137,7 +137,7 @@ resource Workspace_ASIM_ProjectDnsOptional 'Microsoft.OperationalInsights/worksp
         , tostring(column_ifexists('ThreatOriginalRiskLevel', ''))
         , toint(column_ifexists('ThreatRiskLevel', ''))
         , tostring(column_ifexists('UrlCategory', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectDnsOptional'

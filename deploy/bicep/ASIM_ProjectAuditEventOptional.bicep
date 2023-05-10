@@ -129,7 +129,7 @@ resource Workspace_ASIM_ProjectAuditEventOptional 'Microsoft.OperationalInsights
         , tostring(column_ifexists('TargetOriginalRiskLevel', ''))
         , toint(column_ifexists('TargetRiskLevel', ''))
         , tostring(column_ifexists('TargetDvcOs', ''))
-        , tostring(column_ifexists('_ItemId', '')
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     FunctionAlias: 'ASIM_ProjectAuditEventOptional'

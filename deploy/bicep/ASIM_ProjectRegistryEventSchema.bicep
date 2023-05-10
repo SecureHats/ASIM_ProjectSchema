@@ -49,7 +49,7 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
         , tostring(column_ifexists('RegistryValue', ''))
         , tostring(column_ifexists('RegistryValueData', ''))
         , tostring(column_ifexists('RegistryValueType', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
     ;
     let OptionalFields = (optional:bool) {

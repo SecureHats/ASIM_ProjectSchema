@@ -45,7 +45,7 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('SrcDomain', ''))
         , tostring(column_ifexists('SrcHostname', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
     '''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
