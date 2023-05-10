@@ -41,8 +41,8 @@ resource Workspace_ASIM_ProjectFileEventOptional 'Microsoft.OperationalInsights/
         // FileEvent Recommended Fields
         , tostring(column_ifexists('ActorUserId', ''))
         , tostring(column_ifexists('DvcAction', ''))
-        , tostring(column_ifexists('SrcFilePathType', ''))
         , tostring(column_ifexists('SrcFilePath', ''))
+        , tostring(column_ifexists('SrcFilePathType', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))    
         // File Event Optional Fields
         , tostring(column_ifexists('ActorScope', ''))

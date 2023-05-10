@@ -38,10 +38,11 @@ resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsi
         // Authentication Schema Mandatory Fields
         // Authentication Schema Recommended Fields
         , tostring(column_ifexists('Dst', ''))
-        , tostring(column_ifexists('Src', ''))        
+        , tostring(column_ifexists('DvcAction', ''))
+        , tostring(column_ifexists('Src', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
-        , tostring(column_ifexists('TargetHostname', ''))
-        , tostring(column_ifexists('TargetDomain', ''))    
+        , tostring(column_ifexists('TargetDomain', ''))
+        , tostring(column_ifexists('TargetHostname', ''))   
         // Authentication Optional Fields
         , tostring(column_ifexists('ActingAppId', ''))
         , tostring(column_ifexists('ActingAppName', ''))
@@ -138,7 +139,7 @@ resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsi
         , tostring(column_ifexists('TargetOriginalRiskLevel', ''))
         , toint(column_ifexists('TargetRiskLevel', ''))
         , tostring(column_ifexists('ThreatIpAddr', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', '')
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     FunctionAlias: 'ASIM_ProjectAuthenticationOptional'

@@ -35,12 +35,14 @@ resource Workspace_ASIM_ProjectDnsSchema 'Microsoft.OperationalInsights/workspac
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
         // Dns Mandatory Fields
-        , tostring(column_ifexists('DnsQuery', ''))
+        , tostring(column_ifexists('Src', ''))
         // Dns Recommended Fields
-        , tostring(column_ifexists('SrcIpAddr', ''))
-        , tostring(column_ifexists('SrcHostname', ''))
+        , tostring(column_ifexists('DnsQuery', ''))
+        , tostring(column_ifexists('DnsQueryClassName', ''))
+        , tostring(column_ifexists('Dst', ''))
         , tostring(column_ifexists('SrcDomain', ''))
-        , tostring(column_ifexists('DnsQueryTypeName', ''))
+        , tostring(column_ifexists('SrcHostname', ''))
+        , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('TransactionIdHex', ''))
         , tostring(_ItemId)
     | project-away Column*

@@ -15,7 +15,7 @@ resource Workspace_ASIM_ProjectWebSessionOptional 'Microsoft.OperationalInsights
     displayName: 'ASIM_ProjectWebSessionOptional'
     query: '''T
     | project
-    // Common Mandatory Fields
+        // Common Mandatory Fields
           todatetime(TimeGenerated)
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))

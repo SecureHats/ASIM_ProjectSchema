@@ -39,15 +39,15 @@ resource Workspace_ASIM_ProjectAuditEventOptional 'Microsoft.OperationalInsights
         , tostring(column_ifexists('Operation', ''))
         // AuditEvent Recommended Fields
         , tostring(column_ifexists('ActorUsername', ''))
-        , tostring(column_ifexists('DvcAction', ''))
         , tostring(column_ifexists('Dst', ''))
+        , tostring(column_ifexists('DvcAction', ''))
         , tostring(column_ifexists('NewValue', ''))
         , tostring(column_ifexists('Object', ''))
         , tostring(column_ifexists('ObjectId', ''))
         , tostring(column_ifexists('Src', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('TargetIpAddr', ''))
-        , tostring(column_ifexists('TargetHostName', ''))    
+        , tostring(column_ifexists('TargetHostname', ''))    
         // Audit Event Optional Fields
         , tostring(column_ifexists('ActingAppId', ''))
         , tostring(column_ifexists('ActingAppName', ''))
@@ -129,7 +129,7 @@ resource Workspace_ASIM_ProjectAuditEventOptional 'Microsoft.OperationalInsights
         , tostring(column_ifexists('TargetOriginalRiskLevel', ''))
         , toint(column_ifexists('TargetRiskLevel', ''))
         , tostring(column_ifexists('TargetDvcOs', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('_ItemId', '')
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     FunctionAlias: 'ASIM_ProjectAuditEventOptional'

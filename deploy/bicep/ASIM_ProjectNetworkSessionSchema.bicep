@@ -18,7 +18,7 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
     T
     | project
         // Common Mandatory Fields
-          todatetime(column_ifexists('TimeGenerated', ''))
+          todatetime(TimeGenerated)
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))
@@ -43,12 +43,12 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('Dst', ''))
         , tostring(column_ifexists('DstDomain', ''))
         , tostring(column_ifexists('DstHostname', ''))
-        , tostring(column_ifexists('DvcIpAddr', ''))
+        , tostring(column_ifexists('DstIpAddr', ''))
         , tostring(column_ifexists('Src', ''))
         , tostring(column_ifexists('SrcDomain', ''))
         , tostring(column_ifexists('SrcHostname', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
-        , tostring(column_ifexists('_ItemId', ''))
+        , tostring(_ItemId)
     | project-away Column*
     '''
     version: 1

@@ -35,11 +35,11 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
         , tostring(column_ifexists('DvcIpAddr', ''))
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
-        // ProcessEvent Mandatory Fields
+        // Registry Event Mandatory Fields
         , tostring(column_ifexists('ActingProcessId', ''))
         , tostring(column_ifexists('ActorUsername', ''))
         , tostring(column_ifexists('RegistryKey', ''))
-        // ProcessEvent Recommended Fields
+        // Registry Event Recommended Fields
         , tostring(column_ifexists('ActorUserId', ''))
         , tostring(column_ifexists('ParentProcessId', ''))
         , tostring(column_ifexists('RegistryPreviousKey', ''))

@@ -39,10 +39,11 @@ resource Workspace_ASIM_ProjectAuthenticationSchema 'Microsoft.OperationalInsigh
         // Authentication Schema Mandatory Fields
         // Authentication Schema Recommended Fields
         , tostring(column_ifexists('Dst', ''))
-        , tostring(column_ifexists('Src', ''))        
+        , tostring(column_ifexists('DvcAction', ''))
+        , tostring(column_ifexists('Src', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
-        , tostring(column_ifexists('TargetHostname', ''))
         , tostring(column_ifexists('TargetDomain', ''))
+        , tostring(column_ifexists('TargetHostname', ''))
         , tostring(_ItemId)
     | project-away Column*
     ;

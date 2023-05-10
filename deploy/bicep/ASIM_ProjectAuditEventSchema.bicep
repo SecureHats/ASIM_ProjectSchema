@@ -17,7 +17,7 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
     let Parser =
     T
     | project
-        // Common Mandatory Fields
+                // Common Mandatory Fields
           todatetime(TimeGenerated)
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
@@ -40,16 +40,16 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('Operation', ''))
         // AuditEvent Recommended Fields
         , tostring(column_ifexists('ActorUsername', ''))
-        , tostring(column_ifexists('DvcAction', ''))
         , tostring(column_ifexists('Dst', ''))
+        , tostring(column_ifexists('DvcAction', ''))
         , tostring(column_ifexists('NewValue', ''))
         , tostring(column_ifexists('Object', ''))
         , tostring(column_ifexists('ObjectId', ''))
         , tostring(column_ifexists('Src', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('TargetIpAddr', ''))
-        , tostring(column_ifexists('TargetHostName', ''))
-        , tostring(_ItemId)
+        , tostring(column_ifexists('TargetHostname', ''))
+        , tostring(column_ifexists('_ItemId', '')
     | project-away Column*
     ;
     let OptionalFields = (optional:bool) {

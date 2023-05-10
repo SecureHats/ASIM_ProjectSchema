@@ -15,7 +15,7 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
     displayName: 'ASIM_ProjectWebSessionOptional'
     query: '''T
     | project
-    // Common Mandatory Fields
+        // Common Mandatory Fields
           todatetime(TimeGenerated)
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
@@ -47,9 +47,9 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
         , tostring(column_ifexists('RegistryPreviousValueType', ''))
         , tostring(column_ifexists('RegistryValue', ''))
         , tostring(column_ifexists('RegistryValueData', ''))
-        , tostring(column_ifexists('RegistryValueType', ''))    
+        , tostring(column_ifexists('RegistryValueType', ''))
           // Registry Event Optional Fields
-        ,  tostring(column_ifexists('DvcScope', ''))
+        , tostring(column_ifexists('DvcScope', ''))
         , tostring(column_ifexists('DvcScopeId', ''))
         , tostring(column_ifexists('ActingProcessGuid', ''))
         , tostring(column_ifexists('ActingProcessName', ''))

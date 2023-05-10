@@ -45,9 +45,10 @@ resource Workspace_ASIM_ProjectProcessEventSchema 'Microsoft.OperationalInsights
         , tostring(column_ifexists('TargetUsername', ''))
         // ProcessEvent Recommended Fields
         , tostring(column_ifexists('ActorUserId', ''))
+        , tostring(column_ifexists('DvcDomainType', ''))
         , tostring(column_ifexists('Hash', ''))
         , tostring(column_ifexists('ParentProcessId', ''))
-        , tostring(column_ifexists('TargetProcessCreationTime', ''))
+        , todatetime(column_ifexists('TargetProcessCreationTime', ''))
         , tostring(column_ifexists('TargetUserId', ''))
         , tostring(_ItemId)
     | project-away Column*

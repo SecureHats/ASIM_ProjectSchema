@@ -34,15 +34,17 @@ resource Workspace_ASIM_ProjectDnsOptional 'Microsoft.OperationalInsights/worksp
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
         // Dns Mandatory Fields
-        , tostring(column_ifexists('DnsQuery', ''))
+        , tostring(column_ifexists('Src', ''))
         // Dns Recommended Fields
-        , tostring(column_ifexists('SrcIpAddr', ''))
-        , tostring(column_ifexists('SrcHostname', ''))
+        , tostring(column_ifexists('DnsQuery', ''))
+        , tostring(column_ifexists('DnsQueryClassName', ''))
+        , tostring(column_ifexists('Dst', ''))
         , tostring(column_ifexists('SrcDomain', ''))
-        , tostring(column_ifexists('DnsQueryTypeName', ''))
-        , tostring(column_ifexists('TransactionIdHex', ''))    
+        , tostring(column_ifexists('SrcHostname', ''))
+        , tostring(column_ifexists('SrcIpAddr', ''))
+        , tostring(column_ifexists('TransactionIdHex', '')) 
         // DNS Schema Optional Fields
-        ,  todynamic(column_ifexists('AdditionalFields', ''))
+        , todynamic(column_ifexists('AdditionalFields', ''))
         , tostring(column_ifexists('DnsFlags', ''))
         , toint(column_ifexists('DnsNetworkDuration', ''))
         , toint(column_ifexists('DnsQueryClass', ''))

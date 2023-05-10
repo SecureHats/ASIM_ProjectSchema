@@ -42,8 +42,8 @@ resource Workspace_ASIM_ProjectFileEventSchema 'Microsoft.OperationalInsights/wo
         // FileEvent Recommended Fields
         , tostring(column_ifexists('ActorUserId', ''))
         , tostring(column_ifexists('DvcAction', ''))
-        , tostring(column_ifexists('SrcFilePathType', ''))
         , tostring(column_ifexists('SrcFilePath', ''))
+        , tostring(column_ifexists('SrcFilePathType', ''))
         , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(_ItemId)
     | project-away Column*
