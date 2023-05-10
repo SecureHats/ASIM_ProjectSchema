@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.15.31.15270",
+      "templateHash": "8038952223782088987"
+    }
+  },
+  "parameters": {
+    "Workspace": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
+      "apiVersion": "2020-08-01",
+      "name": "[format('{0}/{1}', parameters('Workspace'), '_ASIM_ProjectRegistryEventSchema')]",
+      "properties": {
+        "version": 1,
+        "category": "ASIM",
+        "displayName": "ASIM_ProjectRegistryEventSchema",
+        "etag": "*",
+        "query": "let Parser =\r\n    T\r\n    | project\r\n        // Common Mandatory Fields\r\n          todatetime(TimeGenerated)\r\n        , toint(column_ifexists('EventCount', ''))\r\n        , todatetime(column_ifexists('EventStartTime', ''))\r\n        , todatetime(column_ifexists('EventEndTime', ''))\r\n        , tostring(column_ifexists('EventType', ''))\r\n        , tostring(column_ifexists('EventResult', ''))\r\n        , tostring(column_ifexists('EventProduct', ''))\r\n        , tostring(column_ifexists('EventVendor', ''))\r\n        , tostring(column_ifexists('EventSchema', ''))\r\n        , tostring(column_ifexists('EventSchemaVersion', ''))\r\n        , tostring(column_ifexists('EventSeverity', ''))\r\n        , tostring(column_ifexists('Dvc', ''))\r\n        // Common Recommended Fields\r\n        , tostring(column_ifexists('EventResultDetails', ''))\r\n        , tostring(column_ifexists('EventUid', ''))\r\n        , tostring(column_ifexists('DvcIpAddr', ''))\r\n        , tostring(column_ifexists('DvcHostname', ''))\r\n        , tostring(column_ifexists('DvcDomain', ''))\r\n        // Registry Event Mandatory Fields\r\n        , tostring(column_ifexists('ActingProcessId', ''))\r\n        , tostring(column_ifexists('ActorUsername', ''))\r\n        , tostring(column_ifexists('RegistryKey', ''))\r\n        // Registry Event Recommended Fields\r\n        , tostring(column_ifexists('ActorUserId', ''))\r\n        , tostring(column_ifexists('ParentProcessId', ''))\r\n        , tostring(column_ifexists('RegistryPreviousKey', ''))\r\n        , tostring(column_ifexists('RegistryPreviousValue', ''))\r\n        , tostring(column_ifexists('RegistryPreviousValueData', ''))\r\n        , tostring(column_ifexists('RegistryPreviousValueType', ''))\r\n        , tostring(column_ifexists('RegistryValue', ''))\r\n        , tostring(column_ifexists('RegistryValueData', ''))\r\n        , tostring(column_ifexists('RegistryValueType', ''))\r\n        , tostring(column_ifexists('_ItemId', ''))\r\n    | project-away Column*\r\n    ;\r\n    let OptionalFields = (optional:bool) {\r\n      T\r\n      | where (optional)\r\n      | invoke ASIM_ProjectRegistryEventOptional()\r\n      | project-away Column*\r\n      };\r\n      union isfuzzy = false\r\n      (Parser | join kind=leftouter OptionalFields(optional) on $left._ItemId == $right._ItemId)\r\n      ",
+        "functionParameters": "T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false",
+        "functionAlias": "ASIM_ProjectRegistryEventSchema"
+      }
+    }
+  ]
+}

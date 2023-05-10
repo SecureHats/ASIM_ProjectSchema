@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.15.31.15270",
+      "templateHash": "7849465621587757088"
+    }
+  },
+  "parameters": {
+    "Workspace": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
+      "apiVersion": "2020-08-01",
+      "name": "[format('{0}/{1}', parameters('Workspace'), '_ASIM_ProjectRegistryEventOptional')]",
+      "properties": {
+        "version": 1,
+        "category": "ASIM",
+        "displayName": "ASIM_ProjectWebSessionOptional",
+        "query": "T\r\n    | project\r\n        // Common Mandatory Fields\r\n          todatetime(TimeGenerated)\r\n        , toint(column_ifexists('EventCount', ''))\r\n        , todatetime(column_ifexists('EventStartTime', ''))\r\n        , todatetime(column_ifexists('EventEndTime', ''))\r\n        , tostring(column_ifexists('EventType', ''))\r\n        , tostring(column_ifexists('EventResult', ''))\r\n        , tostring(column_ifexists('EventProduct', ''))\r\n        , tostring(column_ifexists('EventVendor', ''))\r\n        , tostring(column_ifexists('EventSchema', ''))\r\n        , tostring(column_ifexists('EventSchemaVersion', ''))\r\n        , tostring(column_ifexists('EventSeverity', ''))\r\n        , tostring(column_ifexists('Dvc', ''))\r\n        // Common Recommended Fields\r\n        , tostring(column_ifexists('EventResultDetails', ''))\r\n        , tostring(column_ifexists('EventUid', ''))\r\n        , tostring(column_ifexists('DvcIpAddr', ''))\r\n        , tostring(column_ifexists('DvcHostname', ''))\r\n        , tostring(column_ifexists('DvcDomain', ''))\r\n        // ProcessEvent Mandatory Fields\r\n        , tostring(column_ifexists('ActingProcessId', ''))\r\n        , tostring(column_ifexists('ActorUsername', ''))\r\n        , tostring(column_ifexists('RegistryKey', ''))\r\n        // ProcessEvent Recommended Fields\r\n        , tostring(column_ifexists('ActorUserId', ''))\r\n        , tostring(column_ifexists('ParentProcessId', ''))\r\n        , tostring(column_ifexists('RegistryPreviousKey', ''))\r\n        , tostring(column_ifexists('RegistryPreviousValue', ''))\r\n        , tostring(column_ifexists('RegistryPreviousValueData', ''))\r\n        , tostring(column_ifexists('RegistryPreviousValueType', ''))\r\n        , tostring(column_ifexists('RegistryValue', ''))\r\n        , tostring(column_ifexists('RegistryValueData', ''))\r\n        , tostring(column_ifexists('RegistryValueType', ''))\r\n          // Registry Event Optional Fields\r\n        , tostring(column_ifexists('DvcScope', ''))\r\n        , tostring(column_ifexists('DvcScopeId', ''))\r\n        , tostring(column_ifexists('ActingProcessGuid', ''))\r\n        , tostring(column_ifexists('ActingProcessName', ''))\r\n        , tostring(column_ifexists('ActorSessionId', ''))\r\n        , todynamic(column_ifexists('AdditionalFields', ''))\r\n        , tostring(column_ifexists('DstDescription', ''))\r\n        , tostring(column_ifexists('DvcDescription', ''))\r\n        , tostring(column_ifexists('DvcId', ''))\r\n        , tostring(column_ifexists('DvcMacAddr', ''))\r\n        , tostring(column_ifexists('DvcOs', ''))\r\n        , tostring(column_ifexists('DvcOsVersion', ''))\r\n        , tostring(column_ifexists('EventMessage', ''))\r\n        , tostring(column_ifexists('EventOriginalSubType', ''))\r\n        , tostring(column_ifexists('EventOriginalType', ''))\r\n        , tostring(column_ifexists('EventOriginalUid', ''))\r\n        , tostring(column_ifexists('EventOwner', ''))\r\n        , tostring(column_ifexists('EventProductVersion', ''))\r\n        , tostring(column_ifexists('EventReportUrl', ''))\r\n        , tostring(column_ifexists('ParentProcessGuid', ''))\r\n        , tostring(column_ifexists('ParentProcessName', ''))\r\n        , tostring(column_ifexists('SrcDescription', ''))\r\n        , tostring(column_ifexists('_ItemId', ''))\r\n    | project-away Column*",
+        "functionParameters": "T:(TimeGenerated:datetime, _ItemId:string)",
+        "functionAlias": "ASIM_ProjectRegistryEventOptional"
+      }
+    }
+  ]
+}
