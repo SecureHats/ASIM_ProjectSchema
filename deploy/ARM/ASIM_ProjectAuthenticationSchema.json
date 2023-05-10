@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.15.31.15270",
-      "templateHash": "2709364706259728154"
+      "templateHash": "14185971221627850791"
     }
   },
   "parameters": {
@@ -20,7 +20,7 @@
   "resources": [
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
-      "apiVersion": "2022-10-01",
+      "apiVersion": "2020-08-01",
       "name": "[format('{0}/{1}', parameters('Workspace'), '_ASIM_ProjectAuthenticationSchema')]",
       "properties": {
         "version": 1,

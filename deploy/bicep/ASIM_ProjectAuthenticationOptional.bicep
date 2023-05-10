@@ -1,11 +1,11 @@
 @description('The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group.')
 param Workspace string = ''
 
-resource Workspace_resource 'Microsoft.OperationalInsights/workspaces@2017-03-15-preview' existing = {
+resource Workspace_resource 'Microsoft.OperationalInsights/workspaces@2022-10-01' existing = {
   name: Workspace
 }
 
-resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsights/workspaces/savedSearches@2022-10-01' = {
+resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsights/workspaces/savedSearches@2020-08-01' = {
   parent: Workspace_resource
   name: '_ASIM_ProjectAuthenticationOptional'
   properties: {
