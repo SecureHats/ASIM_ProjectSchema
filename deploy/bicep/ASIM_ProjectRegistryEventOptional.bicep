@@ -17,6 +17,7 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
+        , tostring(column_ifexists('Type', ''))
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))
@@ -72,6 +73,8 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
         , tostring(column_ifexists('ParentProcessName', ''))
         , tostring(column_ifexists('SrcDescription', ''))
         , tostring(column_ifexists('_ItemId', ''))
+        , tostring(column_ifexists('Process', ''))
+        , tostring(column_ifexists('User', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectRegistryEventOptional'

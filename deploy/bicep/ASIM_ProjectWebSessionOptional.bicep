@@ -18,6 +18,7 @@ resource Workspace_ASIM_ProjectWebSessionOptional 'Microsoft.OperationalInsights
         // Common Mandatory Fields
           todatetime(TimeGenerated)
         , toint(column_ifexists('EventCount', ''))
+        , tostring(column_ifexists('Type', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))
         , tostring(column_ifexists('EventType', ''))
@@ -169,6 +170,15 @@ resource Workspace_ASIM_ProjectWebSessionOptional 'Microsoft.OperationalInsights
         , tostring(column_ifexists('UrlCategory', ''))
         , tostring(column_ifexists('UrlOriginal', ''))
         , tostring(column_ifexists('_ItemId', ''))
+        , toint(column_ifexists('Duration', ''))
+        , tostring(column_ifexists('Hostname', ''))
+        , tostring(column_ifexists('HttpStatusCode', ''))
+        , tostring(column_ifexists('InnerVlanId', ''))
+        , tostring(column_ifexists('IpAddr', ''))
+        , tostring(column_ifexists('OuterVlanId', ''))
+        , tostring(column_ifexists('SessionId', ''))
+        , tostring(column_ifexists('User', ''))
+        , tostring(column_ifexists('UserAgent', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectWebSessionOptional'

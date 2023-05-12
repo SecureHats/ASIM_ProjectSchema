@@ -19,6 +19,7 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
         // Common Mandatory Fields
           todatetime(TimeGenerated)
         , toint(column_ifexists('EventCount', ''))
+        , tostring(column_ifexists('Type', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))
         , tostring(column_ifexists('EventType', ''))

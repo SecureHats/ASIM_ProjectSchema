@@ -18,6 +18,7 @@ resource Workspace_ASIM_ProjectFileEventOptional 'Microsoft.OperationalInsights/
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
+        , tostring(column_ifexists('Type', ''))
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))
@@ -138,6 +139,13 @@ resource Workspace_ASIM_ProjectFileEventOptional 'Microsoft.OperationalInsights/
         , tostring(column_ifexists('SrcDvcScope', ''))
         , tostring(column_ifexists('SrcDvcScopeId', ''))
         , tostring(column_ifexists('_ItemId', ''))
+        , tostring(column_ifexists('Application', ''))
+        , tostring(column_ifexists('FileName', ''))
+        , tostring(column_ifexists('FilePath', ''))
+        , tostring(column_ifexists('IpAddr', ''))
+        , tostring(column_ifexists('Process', ''))
+        , tostring(column_ifexists('Url', ''))
+        , tostring(column_ifexists('User', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectFileEventOptional'

@@ -154,6 +154,14 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
         , toint(column_ifexists('ThreatRiskLevel', ''))
         , tostring(column_ifexists('SrcScopeId', ''))
         , tostring(column_ifexists('_ItemId', ''))
+        , toint(column_ifexists('Duration', ''))
+        // Network Session Alias Fields
+        , tostring(column_ifexists('Hostname', ''))
+        , tostring(column_ifexists('InnerVlanId', ''))
+        , tostring(column_ifexists('IpAddr', ''))
+        , tostring(column_ifexists('OuterVlanId', ''))
+        , tostring(column_ifexists('SessionId', ''))
+        , tostring(column_ifexists('User', ''))
     | project-away Column*'''
     version: 1
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'

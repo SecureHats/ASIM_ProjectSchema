@@ -16,6 +16,7 @@ resource Workspace_ASIM_ProjectDnsOptional 'Microsoft.OperationalInsights/worksp
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
+        , tostring(column_ifexists('Type', ''))
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))
@@ -138,6 +139,15 @@ resource Workspace_ASIM_ProjectDnsOptional 'Microsoft.OperationalInsights/worksp
         , toint(column_ifexists('ThreatRiskLevel', ''))
         , tostring(column_ifexists('UrlCategory', ''))
         , tostring(column_ifexists('_ItemId', ''))
+        , tostring(column_ifexists('DnsResponseCodeName', ''))
+        , tostring(column_ifexists('Domain', ''))
+        , tostring(column_ifexists('DomainCategory', ''))
+        , toint(column_ifexists('Duration', ''))
+        , tostring(column_ifexists('Hostname', ''))
+        , tostring(column_ifexists('IpAddr', ''))
+        , tostring(column_ifexists('Process', ''))
+        , tostring(column_ifexists('SessionId', ''))
+        , tostring(column_ifexists('User', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectDnsOptional'

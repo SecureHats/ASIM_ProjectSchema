@@ -18,6 +18,7 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
+        , tostring(column_ifexists('Type', ''))
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))

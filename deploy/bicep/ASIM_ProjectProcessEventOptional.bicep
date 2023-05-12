@@ -18,6 +18,7 @@ resource Workspace_ASIM_ProjectProcessEventOptional 'Microsoft.OperationalInsigh
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
+        , tostring(column_ifexists('Type', ''))
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))
@@ -146,6 +147,9 @@ resource Workspace_ASIM_ProjectProcessEventOptional 'Microsoft.OperationalInsigh
         , tostring(column_ifexists('TargetScopeId', ''))
         , tostring(column_ifexists('TargetScope', ''))
         , tostring(column_ifexists('_ItemId', ''))
+        , tostring(column_ifexists('CommandLine', ''))
+        , tostring(column_ifexists('Process', ''))
+        , tostring(column_ifexists('User', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     functionAlias: 'ASIM_ProjectProcessEventOptional'

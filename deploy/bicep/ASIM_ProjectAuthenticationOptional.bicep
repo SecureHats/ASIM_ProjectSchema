@@ -18,6 +18,7 @@ resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsi
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
+        , tostring(column_ifexists('Type', ''))
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))
@@ -140,6 +141,8 @@ resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsi
         , toint(column_ifexists('TargetRiskLevel', ''))
         , tostring(column_ifexists('ThreatIpAddr', ''))
         , tostring(column_ifexists('_ItemId', ''))
+        , tostring(column_ifexists('Application', ''))
+        , tostring(column_ifexists('IpAddr', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     FunctionAlias: 'ASIM_ProjectAuthenticationOptional'

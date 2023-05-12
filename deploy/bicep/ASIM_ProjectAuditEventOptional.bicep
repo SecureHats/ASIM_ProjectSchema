@@ -18,6 +18,7 @@ resource Workspace_ASIM_ProjectAuditEventOptional 'Microsoft.OperationalInsights
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
+        , tostring(column_ifexists('Type', ''))
         , toint(column_ifexists('EventCount', ''))
         , todatetime(column_ifexists('EventStartTime', ''))
         , todatetime(column_ifexists('EventEndTime', ''))
@@ -130,6 +131,11 @@ resource Workspace_ASIM_ProjectAuditEventOptional 'Microsoft.OperationalInsights
         , toint(column_ifexists('TargetRiskLevel', ''))
         , tostring(column_ifexists('TargetDvcOs', ''))
         , tostring(column_ifexists('_ItemId', ''))
+        , tostring(column_ifexists('Application', ''))
+        , tostring(column_ifexists('IpAddr', ''))
+        , tostring(column_ifexists('Process', ''))
+        , tostring(column_ifexists('User', ''))
+        , tostring(column_ifexists('Value', ''))
     | project-away Column*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     FunctionAlias: 'ASIM_ProjectAuditEventOptional'
