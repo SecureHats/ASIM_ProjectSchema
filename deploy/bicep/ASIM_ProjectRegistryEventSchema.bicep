@@ -13,8 +13,7 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
     category: 'ASIM'
     displayName: 'ASIM_ProjectRegistryEventSchema'
     etag: '*'
-    query: '''let Parser =
-    T
+    query: '''T
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
@@ -52,16 +51,7 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
         , tostring(column_ifexists('RegistryValueType', ''))
         , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
-    ;
-    let OptionalFields = (optional:bool) {
-      T
-      | where (optional)
-      | invoke ASIM_ProjectRegistryEventOptional()
-      | project-away Column*
-      };
-      union isfuzzy = false
-      (Parser | join kind=leftouter OptionalFields(optional) on $left._ItemId == $right._ItemId)
-      '''
+    '''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
     functionAlias: 'ASIM_ProjectRegistryEventSchema'
   }
