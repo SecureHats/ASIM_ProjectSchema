@@ -13,7 +13,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     category: 'ASIM'
     displayName: 'ASIM_ProjectSchema'
     query: '''
-    let NetworkSessionSchema =
+    let NetworkSession =
       materialize(
         T
         | where not(optional)
@@ -29,7 +29,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
         | invoke ASIM_ProjectNetworkSessionOptional()
       )
     ;
-    let AuthenticationSchema =
+    let Authentication =
       materialize(
         T
         | where not(optional)
@@ -45,7 +45,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
         | invoke ASIM_ProjectAuthenticationOptional()    
       )
     ;
-    let AuditEventSchema =
+    let AuditEvent =
       materialize(
         T
         | where not(optional)
@@ -61,7 +61,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
         | invoke ASIM_ProjectAuditEventOptional()
       )
     ;
-    let FileEventSchema =
+    let FileEvent =
       materialize(
         T
         | where not(optional)
@@ -77,7 +77,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
         | invoke ASIM_ProjectFileEventOptional()
       )
     ;
-    let ProcessEventSchema =
+    let ProcessEvent =
       materialize(
         T
         | where not(optional)
@@ -93,7 +93,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
         | invoke ASIM_ProjectProcessEventOptional()
       )
     ;
-    let RegistryEventSchema =
+    let RegistryEvent =
       materialize(
         T
         | where not(optional)
@@ -109,7 +109,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
         | invoke ASIM_ProjectRegistryEventOptional()
       )
     ;
-    let WebSessionSchema =
+    let WebSession =
       materialize(
         T
         | where not(optional)
@@ -125,7 +125,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
         | invoke ASIM_ProjectWebSessionOptional()
       )
     ;
-    let DnsSchema =
+    let Dns =
       materialize(
         T
         | where not(optional)
@@ -142,8 +142,22 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       )
     ;
     union isfuzzy = false 
-        *Schema
-      , *Optional
+        NetworkSession
+      , NetworkSessionOptional
+      , Authentication
+      , AuthenticationOptional
+      , AuditEvent
+      , AuditEventOptional
+      , FileEvent
+      , FileEventOptional
+      , ProcessEvent
+      , ProcessEventOptional
+      , RegistryEvent
+      , RegistryEventOptional
+      , WebSession
+      , WebSessionOptional
+      , Dns
+      , DnsOptional
     | project-away _ItemId*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string), optional:bool=false'
     functionAlias: 'ASIM_ProjectSchema'
