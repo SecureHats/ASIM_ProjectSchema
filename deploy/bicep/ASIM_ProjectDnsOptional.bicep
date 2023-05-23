@@ -125,7 +125,6 @@ resource Workspace_ASIM_ProjectDnsOptional 'Microsoft.OperationalInsights/worksp
         , tostring(column_ifexists('SrcUserType', ''))
         , tostring(column_ifexists('SrcOriginalUserType', ''))
         , tostring(column_ifexists('SrcUserSessionId', ''))
-        , tostring(column_ifexists('TenantId', ''))
         , tostring(column_ifexists('ThreatCategory', ''))
         , toint(column_ifexists('ThreatConfidence', ''))
         , tostring(column_ifexists('ThreatField', ''))
