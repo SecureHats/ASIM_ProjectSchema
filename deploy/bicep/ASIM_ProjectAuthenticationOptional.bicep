@@ -81,6 +81,7 @@ resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsi
         , tostring(column_ifexists('LogonMethod', ''))
         , tostring(column_ifexists('LogonProtocol', ''))
         , tostring(column_ifexists('LogonTarget', ''))
+        , tostring(column_ifexists('TargetUsernameType', ''))
         , tostring(column_ifexists('Rule', ''))
         , tostring(column_ifexists('RuleName', ''))
         , toint(column_ifexists('RuleNumber', ''))
