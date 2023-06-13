@@ -5,7 +5,7 @@ resource Workspace_resource 'Microsoft.OperationalInsights/workspaces@2022-10-01
   name: Workspace
 }
 
-resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/workspaces/savedSearches@2020-08-01' = {
+resource Workspace_ASIM_ProjectUserManagementSchema 'Microsoft.OperationalInsights/workspaces/savedSearches@2020-08-01' = {
   parent: Workspace_resource
   name: '_ASIM_ProjectUserManagementOptional'
   properties: {
