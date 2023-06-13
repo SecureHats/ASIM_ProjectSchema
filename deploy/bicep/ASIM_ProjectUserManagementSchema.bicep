@@ -13,8 +13,7 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
     category: 'ASIM'
     displayName: 'ASIM_ProjectUserManagementSchema'
     etag: '*'
-    query: '''
-    T
+    query: '''T
     | project
         // Common Mandatory Fields
           todatetime(TimeGenerated)
@@ -52,10 +51,8 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('SrcDomain', ''))
         , tostring(column_ifexists('SrcDomainType', ''))
         , tostring(column_ifexists('_ItemId', ''))
-    | project-away Column*
-    '''
-    functionParameters
-    : 'T:(TimeGenerated:datetime
-    , _ItemId:string), optional:bool=false'
+    | project-away Column*'''
+    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
     FunctionAlias: 'ASIM_ProjectUserManagementSchema'
+  }
 }

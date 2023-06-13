@@ -141,6 +141,22 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
         | invoke ASIM_ProjectDnsOptional()
       )
     ;
+    let UserManagement = 
+      materialize(
+        T
+        | where not(optional)
+        | where EventSchema == 'UserManagement'
+        | invoke ASIM_ProjectUserManagementSchema()
+      )
+    ;
+    let UserManagementOptional = 
+      materialize(
+        T
+        | where not(optional)
+        | where EventSchema == 'UserManagement'
+        | invoke ASIM_ProjectUserManagementOptional()
+      )
+    ;
     union isfuzzy = false 
         NetworkSession
       , NetworkSessionOptional
@@ -158,6 +174,8 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       , WebSessionOptional
       , Dns
       , DnsOptional
+      , UserManagement
+      , UserManagementOptional
     | project-away _ItemId*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string), optional:bool=false'
     functionAlias: 'ASIM_ProjectSchema'
