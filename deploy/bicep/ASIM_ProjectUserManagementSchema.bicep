@@ -30,7 +30,6 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('EventSeverity', ''))
         , tostring(column_ifexists('Dvc', ''))
         // Common Recommended Fields
-        , tostring(column_ifexists('EventResultDetails', ''))
         , tostring(column_ifexists('EventUid', ''))
         , tostring(column_ifexists('DvcIpAddr', ''))
         , tostring(column_ifexists('DvcHostname', ''))
@@ -38,11 +37,6 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         // User Management Mandatory Fields
         , tostring(column_ifexists('ActorUsername', ''))
         , tostring(column_ifexists('ActorUsernameType', ''))
-        , tostring(column_ifexists('EventType', ''))
-        , tostring(column_ifexists('EventResult', ''))
-        , tostring(column_ifexists('EventSeverity', ''))
-        , tostring(column_ifexists('EventSchema', ''))
-        , tostring(column_ifexists('EventSchemaVersion', ''))
         // User Management Recommended Fields
         , tostring(column_ifexists('EventResultDetails', ''))
         , tostring(column_ifexists('Src', ''))
