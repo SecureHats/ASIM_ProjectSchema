@@ -47,6 +47,7 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         // User Management Recommended Fields
         , tostring(column_ifexists('EventResultDetails', ''))
         , tostring(column_ifexists('Src', ''))
+        , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('SrcHostname', ''))
         , tostring(column_ifexists('SrcDomain', ''))
         , tostring(column_ifexists('SrcDomainType', ''))
