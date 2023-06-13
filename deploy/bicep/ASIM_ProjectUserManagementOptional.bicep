@@ -50,6 +50,7 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
         , tostring(column_ifexists('SrcHostname', ''))
         , tostring(column_ifexists('SrcDomain', ''))
         , tostring(column_ifexists('SrcDomainType', ''))
+        , tostring(column_ifexists('SrcIpAddr', ''))
         , tostring(column_ifexists('_ItemId', ''))
         // User Management Optional Fields
         , tostring(column_ifexists('ActingAppId', ''))
