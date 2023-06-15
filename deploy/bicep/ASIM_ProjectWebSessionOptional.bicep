@@ -74,7 +74,7 @@ resource Workspace_ASIM_ProjectWebSessionOptional 'Microsoft.OperationalInsights
         , toint(column_ifexists('DstPortNumber', ''))
         , tostring(column_ifexists('DstUserId', ''))
         , tostring(column_ifexists('DstUsername', ''))
-        , tostring(column_ifexists('DstUserType', ''))
+        , tostring(column_ifexists('DstUsernameType', ''))
         , tostring(column_ifexists('DstZone', ''))
         , tostring(column_ifexists('DvcAction', ''))
         , tostring(column_ifexists('DvcDescription', ''))
