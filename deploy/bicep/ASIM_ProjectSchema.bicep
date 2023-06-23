@@ -152,9 +152,25 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     let UserManagementOptional = 
       materialize(
         T
-        | where not(optional)
+        | where (optional)
         | where EventSchema == 'UserManagement'
         | invoke ASIM_ProjectUserManagementOptional()
+      )
+    ;
+    let Dhcp = 
+      materialize(
+        T
+        | where not(optional)
+        | where EventSchema == 'Dhcp'
+        | invoke ASIM_ProjectDhcpSchema()
+      )
+    ;
+    let DhcpOptional = 
+      materialize(
+        T
+        | where (optional)
+        | where EventSchema == 'Dhcp'
+        | invoke ASIM_ProjectDhcpOptional()
       )
     ;
     union isfuzzy = false 
@@ -176,6 +192,8 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       , DnsOptional
       , UserManagement
       , UserManagementOptional
+      , Dhcp
+      , DhcpOptional
     | project-away _ItemId*'''
     functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string, EventSchema:string), optional:bool=false'
     functionAlias: 'ASIM_ProjectSchema'
