@@ -156,6 +156,7 @@ resource Workspace_ASIM_ProjectWebSessionOptional 'Microsoft.OperationalInsights
         , toint(column_ifexists('SrcPortNumber', ''))
         , tostring(column_ifexists('SrcUserId', ''))
         , tostring(column_ifexists('SrcUsername', ''))
+        , tostring(column_ifexists('SrcUsernameType', ''))
         , tostring(column_ifexists('SrcUserType', ''))
         , tostring(column_ifexists('SrcZone', ''))
         , tostring(column_ifexists('ThreatCategory', ''))
