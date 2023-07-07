@@ -55,6 +55,7 @@ resource Workspace_ASIM_ProjectUserManagementSchema 'Microsoft.OperationalInsigh
       , tostring(column_ifexists('ActroUserIdType', ''))
       , tostring(column_ifexists('ActorUserType', ''))
       , tostring(column_ifexists('ActorSessionId', ''))
+      , todynamic(column_ifexists('AdditionalFields', ''))
       , tostring(column_ifexists('EventSubType', ''))
       , tostring(column_ifexists('GroupId', ''))
       , tostring(column_ifexists('GroupIdType', ''))
