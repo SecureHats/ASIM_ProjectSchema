@@ -36,11 +36,14 @@ resource Workspace_ASIM_ProjectFileEventSchema 'Microsoft.OperationalInsights/wo
         , tostring(column_ifexists('DvcIpAddr', ''))
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
+        , tostring(column_ifexists('DvcDomainType', ''))
         // FileEvent Mandatory Fields
         , tostring(column_ifexists('ActorUsername', ''))
+        , tostring(column_ifexists('ActorUsernameType', ''))
         , tostring(column_ifexists('TargetFilePathType', ''))
         // FileEvent Recommended Fields
         , tostring(column_ifexists('ActorUserId', ''))
+        , tostring(column_ifexists('ActorUserIdType', ''))
         , tostring(column_ifexists('DvcAction', ''))
         , tostring(column_ifexists('SrcFilePath', ''))
         , tostring(column_ifexists('SrcFilePathType', ''))

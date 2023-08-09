@@ -36,8 +36,10 @@ resource Workspace_ASIM_ProjectFileEventOptional 'Microsoft.OperationalInsights/
         , tostring(column_ifexists('DvcIpAddr', ''))
         , tostring(column_ifexists('DvcHostname', ''))
         , tostring(column_ifexists('DvcDomain', ''))
+        , tostring(column_ifexists('DvcDomainType', ''))
         // FileEvent Mandatory Fields
         , tostring(column_ifexists('ActorUsername', ''))
+        , tostring(column_ifexists('ActorUsernameType', ''))
         , tostring(column_ifexists('TargetFilePathType', ''))
         // FileEvent Recommended Fields
         , tostring(column_ifexists('ActorUserId', ''))
@@ -94,6 +96,7 @@ resource Workspace_ASIM_ProjectFileEventOptional 'Microsoft.OperationalInsights/
         , tostring(column_ifexists('SrcDescription', ''))
         , tostring(column_ifexists('SrcDeviceType', ''))
         , tostring(column_ifexists('SrcDomain', ''))
+        , tostring(column_ifexists('SrcDomainType', ''))
         , tostring(column_ifexists('SrcDvcId', ''))
         , todatetime(column_ifexists('SrcFileCreationTime', ''))
         , tostring(column_ifexists('SrcFileDirectory', ''))
