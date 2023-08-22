@@ -155,7 +155,7 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       , Dhcp
       , DhcpOptional
     | project-away _ItemId*'''
-    functionParameters: 'optional:bool=false'
+    functionParameters: 'T:(EventSchema:string), optional:bool=false'
     functionAlias: 'ASIM_ProjectSchema'
   }
 }
