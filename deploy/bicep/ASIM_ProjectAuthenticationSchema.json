@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.20.4.51522",
+      "templateHash": "9478849862185825780"
+    }
+  },
+  "parameters": {
+    "Workspace": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
+      "apiVersion": "2020-08-01",
+      "name": "[format('{0}/{1}', parameters('Workspace'), '_ASIM_ProjectAuthenticationSchema')]",
+      "properties": {
+        "version": 1,
+        "category": "ASIM",
+        "displayName": "ASIM_ProjectAuthenticationSchema",
+        "etag": "*",
+        "query": "    T\r\n    | project\r\n      // Common Mandatory Fields\r\n        todatetime(TimeGenerated)\r\n      , tostring(column_ifexists('Type', ''))\r\n      , toint(column_ifexists('EventCount', ''))\r\n      , todatetime(column_ifexists('EventStartTime', ''))\r\n      , todatetime(column_ifexists('EventEndTime', ''))\r\n      , tostring(column_ifexists('EventType', ''))\r\n      , tostring(column_ifexists('EventResult', ''))\r\n      , tostring(column_ifexists('EventProduct', ''))\r\n      , tostring(column_ifexists('EventVendor', ''))\r\n      , tostring(column_ifexists('EventSchema', ''))\r\n      , tostring(column_ifexists('EventSchemaVersion', ''))\r\n      , tostring(column_ifexists('EventSeverity', ''))\r\n      , tostring(column_ifexists('Dvc', ''))\r\n      // Common Recommended Fields\r\n      , tostring(column_ifexists('EventResultDetails', ''))\r\n      , tostring(column_ifexists('EventUid', ''))\r\n      , tostring(column_ifexists('DvcIpAddr', ''))\r\n      , tostring(column_ifexists('DvcHostname', ''))\r\n      , tostring(column_ifexists('DvcDomain', ''))\r\n      // Authentication Schema Mandatory Fields\r\n      // Authentication Schema Recommended Fields\r\n      , tostring(column_ifexists('Dst', ''))\r\n      , tostring(column_ifexists('DvcAction', ''))\r\n      , tostring(column_ifexists('Src', ''))\r\n      , tostring(column_ifexists('SrcIpAddr', ''))\r\n      , tostring(column_ifexists('TargetDomain', ''))\r\n      , tostring(column_ifexists('TargetHostname', ''))\r\n      , tostring(column_ifexists('_ItemId', ''))\r\n    | project-away Column*\r\n    ",
+        "functionParameters": "optional:bool=false",
+        "functionAlias": "ASIM_ProjectAuthenticationSchema"
+      }
+    }
+  ]
+}

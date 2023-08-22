@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.20.4.51522",
+      "templateHash": "16060981140009423814"
+    }
+  },
+  "parameters": {
+    "Workspace": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The Microsoft Sentinel workspace into which the function will be deployed. Has to be in the selected Resource Group."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
+      "apiVersion": "2020-08-01",
+      "name": "[format('{0}/{1}', parameters('Workspace'), '_ASIM_ProjectUserManagementOptional')]",
+      "properties": {
+        "version": 1,
+        "category": "ASIM",
+        "displayName": "ASIM_ProjectUserManagementOptional",
+        "etag": "*",
+        "query": "    T\r\n    | project\r\n      // Common Mandatory Fields\r\n        todatetime(TimeGenerated)\r\n      , tostring(column_ifexists('Type', ''))\r\n      , toint(column_ifexists('EventCount', ''))\r\n      , todatetime(column_ifexists('EventStartTime', ''))\r\n      , todatetime(column_ifexists('EventEndTime', ''))\r\n      , tostring(column_ifexists('EventType', ''))\r\n      , tostring(column_ifexists('EventResult', ''))\r\n      , tostring(column_ifexists('EventProduct', ''))\r\n      , tostring(column_ifexists('EventVendor', ''))\r\n      , tostring(column_ifexists('EventSchema', ''))\r\n      , tostring(column_ifexists('EventSchemaVersion', ''))\r\n      , tostring(column_ifexists('EventSeverity', ''))\r\n      , tostring(column_ifexists('Dvc', ''))\r\n      // Common Recommended Fields\r\n      , tostring(column_ifexists('EventResultDetails', ''))\r\n      , tostring(column_ifexists('EventUid', ''))\r\n      , tostring(column_ifexists('DvcIpAddr', ''))\r\n      , tostring(column_ifexists('DvcHostname', ''))\r\n      , tostring(column_ifexists('DvcDomain', ''))\r\n      // User Management Mandatory Fields\r\n      , tostring(column_ifexists('ActorUsername', ''))\r\n      , tostring(column_ifexists('ActorUsernameType', ''))\r\n      // User Management Recommended Fields\r\n      , tostring(column_ifexists('Src', ''))\r\n      , tostring(column_ifexists('SrcHostname', ''))\r\n      , tostring(column_ifexists('SrcDomain', ''))\r\n      , tostring(column_ifexists('SrcDomainType', ''))\r\n      , tostring(column_ifexists('SrcIpAddr', ''))\r\n      , tostring(column_ifexists('_ItemId', ''))\r\n      // User Management Optional Fields\r\n      , tostring(column_ifexists('ActingAppId', ''))\r\n      , tostring(column_ifexists('ActiveAppName', ''))\r\n      , tostring(column_ifexists('ActingAppType', ''))\r\n      , tostring(column_ifexists('HttpUserAgent', ''))\r\n      , tostring(column_ifexists('ActorUserId', ''))\r\n      , tostring(column_ifexists('ActroUserIdType', ''))\r\n      , tostring(column_ifexists('ActorUserType', ''))\r\n      , tostring(column_ifexists('ActorSessionId', ''))\r\n      , todynamic(column_ifexists('AdditionalFields', ''))\r\n      , tostring(column_ifexists('EventSubType', ''))\r\n      , tostring(column_ifexists('GroupId', ''))\r\n      , tostring(column_ifexists('GroupIdType', ''))\r\n      , tostring(column_ifexists('GroupName', ''))\r\n      , tostring(column_ifexists('GroupNameType', ''))\r\n      , tostring(column_ifexists('GroupType', ''))\r\n      , tostring(column_ifexists('GroupOriginalType', ''))\r\n      , tostring(column_ifexists('SrcFQDN', ''))\r\n      , tostring(column_ifexists('SrcDvcId', ''))\r\n      , tostring(column_ifexists('SrcDvcScopeId', ''))\r\n      , tostring(column_ifexists('SrcDvcScope', ''))\r\n      , tostring(column_ifexists('SrcDvcIdType', ''))\r\n      , tostring(column_ifexists('SrcDeviceType', ''))\r\n      , tostring(column_ifexists('SrcGeostring', ''))\r\n      , tostring(column_ifexists('SrcGeostring', ''))\r\n      , tostring(column_ifexists('TargetUserId', ''))\r\n      , tostring(column_ifexists('TargetUserIdType', ''))\r\n      , tostring(column_ifexists('TargetUsername', ''))\r\n      , tostring(column_ifexists('TargetUsernameType', ''))\r\n      , tostring(column_ifexists('TargetUserType', ''))\r\n      , tostring(column_ifexists('TargetOriginalUserType', ''))\r\n      , tostring(column_ifexists('PreviousPropertyValue', ''))\r\n      , tostring(column_ifexists('NewPropertyValue', ''))\r\n      , tostring(column_ifexists('ActorOriginalUserType', ''))\r\n      , tostring(column_ifexists('User', ''))\r\n      , tostring(column_ifexists('Hostname', ''))\r\n      , tostring(column_ifexists('IpAddr', ''))\r\n      , tostring(column_ifexists('UpdatedPropertyName', ''))\r\n  | project-away Column*",
+        "functionParameters": "optional:bool=false",
+        "functionAlias": "ASIM_ProjectUserManagementOptional"
+      }
+    }
+  ]
+}
