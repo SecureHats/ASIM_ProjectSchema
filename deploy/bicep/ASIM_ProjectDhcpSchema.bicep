@@ -15,7 +15,7 @@ resource Workspace_ASIM_ProjectDnsSchema 'Microsoft.OperationalInsights/workspac
     T
     | project
       // Common Mandatory Fields
-      todatetime(TimeGenerated)
+    todatetime(column_ifexists('TimeGenerated', ''))
       , tostring(column_ifexists('Type', ''))
       , toint(column_ifexists('EventCount', ''))
       , todatetime(column_ifexists('EventStartTime', ''))
@@ -48,7 +48,7 @@ resource Workspace_ASIM_ProjectDnsSchema 'Microsoft.OperationalInsights/workspac
       , tostring(column_ifexists('EventUid', ''))
     | project-away Column*
     '''
-    functionParameters: 'optional:bool=false'
+    functionParameters: 'T:(*), optional:bool=false'
     functionAlias: 'ASIM_ProjectDhcpSchema'
   }
 }

@@ -17,7 +17,7 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
     T
     | project
       // Common Mandatory Fields
-        todatetime(TimeGenerated)
+      todatetime(column_ifexists('TimeGenerated', ''))
       , toint(column_ifexists('EventCount', ''))
       , tostring(column_ifexists('Type', ''))
       , todatetime(column_ifexists('EventStartTime', ''))
@@ -49,7 +49,7 @@ resource Workspace_ASIM_ProjectWebSessionSchema 'Microsoft.OperationalInsights/w
       , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*
     '''
-    functionParameters: 'optional:bool=false'
+    functionParameters: 'T:(*), optional:bool=false'
     functionAlias: 'ASIM_ProjectWebSessionSchema'
   }
 }

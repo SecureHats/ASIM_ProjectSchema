@@ -18,7 +18,7 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
     T
     | project
       // Common Mandatory Fields
-        todatetime(TimeGenerated)
+        todatetime(column_ifexists('TimeGenerated', ''))
       , tostring(column_ifexists('Type', ''))
       , toint(column_ifexists('EventCount', ''))
       , todatetime(column_ifexists('EventStartTime', ''))
@@ -53,6 +53,6 @@ resource Workspace_ASIM_ProjectNetworkSessionSchema 'Microsoft.OperationalInsigh
     | project-away Column*
     '''
     version: 1
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
+    functionParameters: 'T:(*), optional:bool=false'
   }
 }

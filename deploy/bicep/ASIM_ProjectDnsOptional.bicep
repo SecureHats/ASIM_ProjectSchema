@@ -15,7 +15,7 @@ resource Workspace_ASIM_ProjectDnsOptional 'Microsoft.OperationalInsights/worksp
     T
     | project
       // Common Mandatory Fields
-        todatetime(TimeGenerated)
+      todatetime(column_ifexists('TimeGenerated', ''))
       , tostring(column_ifexists('Type', ''))
       , toint(column_ifexists('EventCount', ''))
       , todatetime(column_ifexists('EventStartTime', ''))
@@ -148,7 +148,7 @@ resource Workspace_ASIM_ProjectDnsOptional 'Microsoft.OperationalInsights/worksp
       , tostring(column_ifexists('SessionId', ''))
       , tostring(column_ifexists('User', ''))
     | project-away Column*'''
-    functionParameters: ''
+    functionParameters: 'T:(*), optional:bool=false'
     functionAlias: 'ASIM_ProjectDnsOptional'
   }
 }

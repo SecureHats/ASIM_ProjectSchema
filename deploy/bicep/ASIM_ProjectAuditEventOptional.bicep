@@ -17,7 +17,7 @@ resource Workspace_ASIM_ProjectAuditEventOptional 'Microsoft.OperationalInsights
     T
     | project
       // Common Mandatory Fields
-        todatetime(TimeGenerated)
+      todatetime(column_ifexists('TimeGenerated', ''))
       , tostring(column_ifexists('Type', ''))
       , toint(column_ifexists('EventCount', ''))
       , todatetime(column_ifexists('EventStartTime', ''))
@@ -137,7 +137,7 @@ resource Workspace_ASIM_ProjectAuditEventOptional 'Microsoft.OperationalInsights
       , tostring(column_ifexists('User', ''))
       , tostring(column_ifexists('Value', ''))
     | project-away Column*'''
-    functionParameters: ''
+    functionParameters: 'T:(*), optional:bool=false'
     functionAlias: 'ASIM_ProjectAuditEventOptional'
   }
 }

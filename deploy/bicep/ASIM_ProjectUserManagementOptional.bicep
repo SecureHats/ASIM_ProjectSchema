@@ -17,7 +17,7 @@ resource Workspace_ASIM_ProjectUserManagementSchema 'Microsoft.OperationalInsigh
     T
     | project
       // Common Mandatory Fields
-        todatetime(TimeGenerated)
+      todatetime(column_ifexists('TimeGenerated', ''))
       , tostring(column_ifexists('Type', ''))
       , toint(column_ifexists('EventCount', ''))
       , todatetime(column_ifexists('EventStartTime', ''))
@@ -85,7 +85,7 @@ resource Workspace_ASIM_ProjectUserManagementSchema 'Microsoft.OperationalInsigh
       , tostring(column_ifexists('IpAddr', ''))
       , tostring(column_ifexists('UpdatedPropertyName', ''))
   | project-away Column*'''
-    functionParameters: 'optional:bool=false'
+  functionParameters: 'T:(*), optional:bool=false'
     functionAlias: 'ASIM_ProjectUserManagementOptional'
   }
 }

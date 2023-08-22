@@ -17,7 +17,7 @@ resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsi
     T
     | project
       // Common Mandatory Fields
-        todatetime(TimeGenerated)
+      todatetime(column_ifexists('TimeGenerated', ''))
       , tostring(column_ifexists('Type', ''))
       , toint(column_ifexists('EventCount', ''))
       , todatetime(column_ifexists('EventStartTime', ''))
@@ -145,7 +145,7 @@ resource Workspace_ASIM_ProjectAuthenticationOptional 'Microsoft.OperationalInsi
       , tostring(column_ifexists('Application', ''))
       , tostring(column_ifexists('IpAddr', ''))
     | project-away Column*'''
-    functionParameters: ''
+    functionParameters: 'T:(*), optional:bool=false'
     functionAlias: 'ASIM_ProjectAuthenticationOptional'
   }
 }

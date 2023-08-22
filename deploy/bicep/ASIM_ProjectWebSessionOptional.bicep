@@ -16,7 +16,7 @@ resource Workspace_ASIM_ProjectWebSessionOptional 'Microsoft.OperationalInsights
     query: '''T
     | project
       // Common Mandatory Fields
-        todatetime(TimeGenerated)
+      todatetime(column_ifexists('TimeGenerated', ''))
       , toint(column_ifexists('EventCount', ''))
       , tostring(column_ifexists('Type', ''))
       , todatetime(column_ifexists('EventStartTime', ''))
@@ -184,7 +184,7 @@ resource Workspace_ASIM_ProjectWebSessionOptional 'Microsoft.OperationalInsights
       , tostring(column_ifexists('User', ''))
       , tostring(column_ifexists('UserAgent', ''))
     | project-away Column*'''
-    functionParameters: ''
+    functionParameters: 'T:(*), optional:bool=false'
     functionAlias: 'ASIM_ProjectWebSessionOptional'
   }
 }
