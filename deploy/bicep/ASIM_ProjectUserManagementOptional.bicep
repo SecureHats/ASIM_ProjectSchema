@@ -85,7 +85,7 @@ resource Workspace_ASIM_ProjectUserManagementSchema 'Microsoft.OperationalInsigh
       , tostring(column_ifexists('IpAddr', ''))
       , tostring(column_ifexists('UpdatedPropertyName', ''))
   | project-away Column*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string), optional:bool=false'
-    FunctionAlias: 'ASIM_ProjectUserManagementOptional'
+    functionParameters: 'optional:bool=false'
+    functionAlias: 'ASIM_ProjectUserManagementOptional'
   }
 }

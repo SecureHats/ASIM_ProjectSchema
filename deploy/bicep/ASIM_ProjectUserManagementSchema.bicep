@@ -15,38 +15,38 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
     etag: '*'
     query: '''T
     | project
-        // Common Mandatory Fields
-          todatetime(TimeGenerated)
-        , tostring(column_ifexists('Type', ''))
-        , toint(column_ifexists('EventCount', ''))
-        , todatetime(column_ifexists('EventStartTime', ''))
-        , todatetime(column_ifexists('EventEndTime', ''))
-        , tostring(column_ifexists('EventType', ''))
-        , tostring(column_ifexists('EventResult', ''))
-        , tostring(column_ifexists('EventProduct', ''))
-        , tostring(column_ifexists('EventVendor', ''))
-        , tostring(column_ifexists('EventSchema', ''))
-        , tostring(column_ifexists('EventSchemaVersion', ''))
-        , tostring(column_ifexists('EventSeverity', ''))
-        , tostring(column_ifexists('Dvc', ''))
-        // Common Recommended Fields
-        , tostring(column_ifexists('EventUid', ''))
-        , tostring(column_ifexists('DvcIpAddr', ''))
-        , tostring(column_ifexists('DvcHostname', ''))
-        , tostring(column_ifexists('DvcDomain', ''))
-        // User Management Mandatory Fields
-        , tostring(column_ifexists('ActorUsername', ''))
-        , tostring(column_ifexists('ActorUsernameType', ''))
-        // User Management Recommended Fields
-        , tostring(column_ifexists('EventResultDetails', ''))
-        , tostring(column_ifexists('Src', ''))
-        , tostring(column_ifexists('SrcIpAddr', ''))
-        , tostring(column_ifexists('SrcHostname', ''))
-        , tostring(column_ifexists('SrcDomain', ''))
-        , tostring(column_ifexists('SrcDomainType', ''))
-        , tostring(column_ifexists('_ItemId', ''))
+      // Common Mandatory Fields
+        todatetime(TimeGenerated)
+      , tostring(column_ifexists('Type', ''))
+      , toint(column_ifexists('EventCount', ''))
+      , todatetime(column_ifexists('EventStartTime', ''))
+      , todatetime(column_ifexists('EventEndTime', ''))
+      , tostring(column_ifexists('EventType', ''))
+      , tostring(column_ifexists('EventResult', ''))
+      , tostring(column_ifexists('EventProduct', ''))
+      , tostring(column_ifexists('EventVendor', ''))
+      , tostring(column_ifexists('EventSchema', ''))
+      , tostring(column_ifexists('EventSchemaVersion', ''))
+      , tostring(column_ifexists('EventSeverity', ''))
+      , tostring(column_ifexists('Dvc', ''))
+      // Common Recommended Fields
+      , tostring(column_ifexists('EventUid', ''))
+      , tostring(column_ifexists('DvcIpAddr', ''))
+      , tostring(column_ifexists('DvcHostname', ''))
+      , tostring(column_ifexists('DvcDomain', ''))
+      // User Management Mandatory Fields
+      , tostring(column_ifexists('ActorUsername', ''))
+      , tostring(column_ifexists('ActorUsernameType', ''))
+      // User Management Recommended Fields
+      , tostring(column_ifexists('EventResultDetails', ''))
+      , tostring(column_ifexists('Src', ''))
+      , tostring(column_ifexists('SrcIpAddr', ''))
+      , tostring(column_ifexists('SrcHostname', ''))
+      , tostring(column_ifexists('SrcDomain', ''))
+      , tostring(column_ifexists('SrcDomainType', ''))
+      , tostring(column_ifexists('_ItemId', ''))
     | project-away Column*'''
-    functionParameters: 'T:(TimeGenerated:datetime, _ItemId:string)'
-    FunctionAlias: 'ASIM_ProjectUserManagementSchema'
+    functionParameters: ''
+    functionAlias: 'ASIM_ProjectUserManagementSchema'
   }
 }
