@@ -13,7 +13,7 @@ resource Workspace_ASIM_ProjectWebSessionOptional 'Microsoft.OperationalInsights
     version: 1
     category: 'ASIM'
     displayName: 'ASIM_ProjectWebSessionOptional'
-    query: '''T
+    query: '''
     T | project
         tostring(column_ifexists('Dst', ''))
       , tostring(column_ifexists('Dvc', ''))
