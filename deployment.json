@@ -286,6 +286,74 @@
       {
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2020-10-01",
+        "name": "linkedASIM_UserManagementSchema",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectUserManagementSchema.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
+        "name": "linkedASIM_UserManagementSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectUserManagementOptional.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
+        "name": "linkedASIM_DhcpSchemaOptional",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectDhcpOptional.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
+        "name": "linkedASIM_DhcpSchema",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "https://raw.githubusercontent.com/SecureHats/ASIM_ProjectSchema/main/deploy/ARM/ASIM_ProjectDhcpSchema.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "Workspace": {
+              "value": "[parameters('Workspace')]"
+            }
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-10-01",
         "name": "ASIM_ProjectSchema",
         "properties": {
           "mode": "Incremental",

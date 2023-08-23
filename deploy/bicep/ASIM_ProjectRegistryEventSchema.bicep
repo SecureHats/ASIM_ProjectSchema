@@ -14,33 +14,24 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
     displayName: 'ASIM_ProjectRegistryEventSchema'
     etag: '*'
     query: '''T
-    | project
-      // Common Mandatory Fields
-      todatetime(column_ifexists('TimeGenerated', ''))
-      , tostring(column_ifexists('Type', ''))
-      , toint(column_ifexists('EventCount', ''))
-      , todatetime(column_ifexists('EventStartTime', ''))
-      , todatetime(column_ifexists('EventEndTime', ''))
-      , tostring(column_ifexists('EventType', ''))
-      , tostring(column_ifexists('EventResult', ''))
-      , tostring(column_ifexists('EventProduct', ''))
-      , tostring(column_ifexists('EventVendor', ''))
-      , tostring(column_ifexists('EventSchema', ''))
-      , tostring(column_ifexists('EventSchemaVersion', ''))
-      , tostring(column_ifexists('EventSeverity', ''))
-      , tostring(column_ifexists('Dvc', ''))
-      // Common Recommended Fields
-      , tostring(column_ifexists('EventResultDetails', ''))
-      , tostring(column_ifexists('EventUid', ''))
-      , tostring(column_ifexists('DvcIpAddr', ''))
-      , tostring(column_ifexists('DvcHostname', ''))
-      , tostring(column_ifexists('DvcDomain', ''))
-      // Registry Event Mandatory Fields
-      , tostring(column_ifexists('ActingProcessId', ''))
+    T | project
+        tostring(column_ifexists('ActingProcessId', ''))
       , tostring(column_ifexists('ActorUsername', ''))
+      , tostring(column_ifexists('Dvc', ''))
+      , toint(column_ifexists('EventCount', ''))
+      , todatetime(column_ifexists('EventEndTime', ''))
+      , tostring(column_ifexists('EventProduct', ''))
+      , tostring(column_ifexists('EventResult', ''))
+      , tostring(column_ifexists('EventSchemaVersion', ''))
+      , todatetime(column_ifexists('EventStartTime', ''))
+      , tostring(column_ifexists('EventType', ''))
       , tostring(column_ifexists('RegistryKey', ''))
-      // Registry Event Recommended Fields
+      , todatetime(column_ifexists('TimeGenerated', ''))
+      , tostring(column_ifexists('Type', ''))
       , tostring(column_ifexists('ActorUserId', ''))
+      , tostring(column_ifexists('DvcHostname', ''))
+      , tostring(column_ifexists('DvcIpAddr', ''))
+      , tostring(column_ifexists('EventUid', ''))
       , tostring(column_ifexists('ParentProcessId', ''))
       , tostring(column_ifexists('RegistryPreviousKey', ''))
       , tostring(column_ifexists('RegistryPreviousValue', ''))
@@ -49,7 +40,9 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
       , tostring(column_ifexists('RegistryValue', ''))
       , tostring(column_ifexists('RegistryValueData', ''))
       , tostring(column_ifexists('RegistryValueType', ''))
-      , tostring(column_ifexists('_ItemId', ''))
+      , tostring(column_ifexists('ActorUserIdType', ''))
+      , tostring(column_ifexists('ActorUsernameType', ''))
+      , tostring(column_ifexists('User', ''))
     | project-away Column*
     '''
     functionParameters: 'T:(*), optional:bool=false'

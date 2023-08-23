@@ -14,42 +14,40 @@ resource Workspace_ASIM_ProjectAuditEventSchema 'Microsoft.OperationalInsights/w
     displayName: 'ASIM_ProjectAuditEventSchema'
     etag: '*'
     query: '''
-    T
-    | project
-      // Common Mandatory Fields
-      todatetime(column_ifexists('TimeGenerated', ''))
-      , tostring(column_ifexists('Type', ''))
-      , toint(column_ifexists('EventCount', ''))
-      , todatetime(column_ifexists('EventStartTime', ''))
+    T | project
+        tostring(column_ifexists('Dvc', ''))
       , todatetime(column_ifexists('EventEndTime', ''))
-      , tostring(column_ifexists('EventType', ''))
-      , tostring(column_ifexists('EventResult', ''))
       , tostring(column_ifexists('EventProduct', ''))
-      , tostring(column_ifexists('EventVendor', ''))
+      , tostring(column_ifexists('EventResult', ''))
       , tostring(column_ifexists('EventSchema', ''))
       , tostring(column_ifexists('EventSchemaVersion', ''))
-      , tostring(column_ifexists('EventSeverity', ''))
-      , tostring(column_ifexists('Dvc', ''))
-      // Common Recommended Fields
-      , tostring(column_ifexists('EventResultDetails', ''))
-      , tostring(column_ifexists('EventUid', ''))
-      , tostring(column_ifexists('DvcIpAddr', ''))
-      , tostring(column_ifexists('DvcHostname', ''))
-      , tostring(column_ifexists('DvcDomain', ''))
-      // AuditEvent Mandatory Fields
+      , todatetime(column_ifexists('EventStartTime', ''))
+      , tostring(column_ifexists('EventType', ''))
+      , tostring(column_ifexists('EventVendor', ''))
       , tostring(column_ifexists('Operation', ''))
-      // AuditEvent Recommended Fields
+      , todatetime(column_ifexists('TimeGenerated', ''))
+      , tostring(column_ifexists('Type', ''))
       , tostring(column_ifexists('ActorUsername', ''))
       , tostring(column_ifexists('Dst', ''))
       , tostring(column_ifexists('DvcAction', ''))
+      , tostring(column_ifexists('DvcDomain', ''))
+      , tostring(column_ifexists('DvcHostname', ''))
+      , tostring(column_ifexists('DvcIpAddr', ''))
+      , tostring(column_ifexists('EventResultDetails', ''))
+      , tostring(column_ifexists('EventSeverity', ''))
+      , tostring(column_ifexists('EventUid', ''))
       , tostring(column_ifexists('NewValue', ''))
       , tostring(column_ifexists('Object', ''))
       , tostring(column_ifexists('ObjectId', ''))
       , tostring(column_ifexists('Src', ''))
       , tostring(column_ifexists('SrcIpAddr', ''))
-      , tostring(column_ifexists('TargetIpAddr', ''))
       , tostring(column_ifexists('TargetHostname', ''))
-      , tostring(column_ifexists('_ItemId', ''))
+      , tostring(column_ifexists('TargetIpAddr', ''))
+      , tostring(column_ifexists('ActorUsernameType', ''))
+      , tostring(column_ifexists('DvcDomainType', ''))
+      , tostring(column_ifexists('IpAddr', ''))
+      , tostring(column_ifexists('User', ''))
+      , tostring(column_ifexists('Value', ''))
     | project-away Column*
     '''
     functionParameters: 'T:(*), optional:bool=false'

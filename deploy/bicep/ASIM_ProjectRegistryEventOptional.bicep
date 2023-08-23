@@ -13,34 +13,25 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
     version: 1
     category: 'ASIM'
     displayName: 'ASIM_ProjectWebSessionOptional'
-    query: '''T
-    | project
-      // Common Mandatory Fields
-      todatetime(column_ifexists('TimeGenerated', ''))
-      , tostring(column_ifexists('Type', ''))
-      , toint(column_ifexists('EventCount', ''))
-      , todatetime(column_ifexists('EventStartTime', ''))
-      , todatetime(column_ifexists('EventEndTime', ''))
-      , tostring(column_ifexists('EventType', ''))
-      , tostring(column_ifexists('EventResult', ''))
-      , tostring(column_ifexists('EventProduct', ''))
-      , tostring(column_ifexists('EventVendor', ''))
-      , tostring(column_ifexists('EventSchema', ''))
-      , tostring(column_ifexists('EventSchemaVersion', ''))
-      , tostring(column_ifexists('EventSeverity', ''))
-      , tostring(column_ifexists('Dvc', ''))
-      // Common Recommended Fields
-      , tostring(column_ifexists('EventResultDetails', ''))
-      , tostring(column_ifexists('EventUid', ''))
-      , tostring(column_ifexists('DvcIpAddr', ''))
-      , tostring(column_ifexists('DvcHostname', ''))
-      , tostring(column_ifexists('DvcDomain', ''))
-      // ProcessEvent Mandatory Fields
-      , tostring(column_ifexists('ActingProcessId', ''))
+    query: '''
+    T | project
+        tostring(column_ifexists('ActingProcessId', ''))
       , tostring(column_ifexists('ActorUsername', ''))
+      , tostring(column_ifexists('Dvc', ''))
+      , toint(column_ifexists('EventCount', ''))
+      , todatetime(column_ifexists('EventEndTime', ''))
+      , tostring(column_ifexists('EventProduct', ''))
+      , tostring(column_ifexists('EventResult', ''))
+      , tostring(column_ifexists('EventSchemaVersion', ''))
+      , todatetime(column_ifexists('EventStartTime', ''))
+      , tostring(column_ifexists('EventType', ''))
       , tostring(column_ifexists('RegistryKey', ''))
-      // ProcessEvent Recommended Fields
+      , todatetime(column_ifexists('TimeGenerated', ''))
+      , tostring(column_ifexists('Type', ''))
       , tostring(column_ifexists('ActorUserId', ''))
+      , tostring(column_ifexists('DvcHostname', ''))
+      , tostring(column_ifexists('DvcIpAddr', ''))
+      , tostring(column_ifexists('EventUid', ''))
       , tostring(column_ifexists('ParentProcessId', ''))
       , tostring(column_ifexists('RegistryPreviousKey', ''))
       , tostring(column_ifexists('RegistryPreviousValue', ''))
@@ -49,9 +40,6 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
       , tostring(column_ifexists('RegistryValue', ''))
       , tostring(column_ifexists('RegistryValueData', ''))
       , tostring(column_ifexists('RegistryValueType', ''))
-        // Registry Event Optional Fields
-      , tostring(column_ifexists('DvcScope', ''))
-      , tostring(column_ifexists('DvcScopeId', ''))
       , tostring(column_ifexists('ActingProcessGuid', ''))
       , tostring(column_ifexists('ActingProcessName', ''))
       , tostring(column_ifexists('ActorSessionId', ''))
@@ -62,6 +50,8 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
       , tostring(column_ifexists('DvcMacAddr', ''))
       , tostring(column_ifexists('DvcOs', ''))
       , tostring(column_ifexists('DvcOsVersion', ''))
+      , tostring(column_ifexists('DvcScope', ''))
+      , tostring(column_ifexists('DvcScopeId', ''))
       , tostring(column_ifexists('EventMessage', ''))
       , tostring(column_ifexists('EventOriginalSubType', ''))
       , tostring(column_ifexists('EventOriginalType', ''))
@@ -72,7 +62,8 @@ resource Workspace_ASIM_ProjectRegistryEventOptional 'Microsoft.OperationalInsig
       , tostring(column_ifexists('ParentProcessGuid', ''))
       , tostring(column_ifexists('ParentProcessName', ''))
       , tostring(column_ifexists('SrcDescription', ''))
-      , tostring(column_ifexists('_ItemId', ''))
+      , tostring(column_ifexists('ActorUserIdType', ''))
+      , tostring(column_ifexists('ActorUsernameType', ''))
       , tostring(column_ifexists('Process', ''))
       , tostring(column_ifexists('User', ''))
     | project-away Column*'''
