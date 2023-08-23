@@ -13,7 +13,7 @@ resource Workspace_ASIM_ProjectRegistryEventSchema 'Microsoft.OperationalInsight
     category: 'ASIM'
     displayName: 'ASIM_ProjectRegistryEventSchema'
     etag: '*'
-    query: '''T
+    query: '''
     T | project
         tostring(column_ifexists('ActingProcessId', ''))
       , tostring(column_ifexists('ActorUsername', ''))
