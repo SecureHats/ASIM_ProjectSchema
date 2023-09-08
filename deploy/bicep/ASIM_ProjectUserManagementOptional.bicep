@@ -27,6 +27,8 @@ resource Workspace_ASIM_ProjectUserManagementSchema 'Microsoft.OperationalInsigh
       , todatetime(column_ifexists('EventStartTime', ''))
       , tostring(column_ifexists('EventType', ''))
       , tostring(column_ifexists('EventVendor', ''))
+      , todatetime(column_ifexists('TimeGenerated', ''))
+      , tostring(column_ifexists('Type', ''))
       , tostring(column_ifexists('DvcAction', ''))
       , tostring(column_ifexists('DvcDomain', ''))
       , tostring(column_ifexists('DvcFQDN', ''))

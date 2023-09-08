@@ -15,128 +15,126 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
     query: '''
     let NetworkSession =
         T
-        | where not(optional)
         | where EventSchema == 'NetworkSession'
+            and not(optional)
         | invoke ASIM_ProjectNetworkSessionSchema()
     ;
     let NetworkSessionOptional =
-      T
-        | where (optional)
+        T
         | where EventSchema == 'NetworkSession'
+            and (optional)
         | invoke ASIM_ProjectNetworkSessionOptional()
     ;
     let Authentication =
-      T
-        | where not(optional)
+        T
         | where EventSchema == 'Authentication'
+            and not(optional)
         | invoke ASIM_ProjectAuthenticationSchema()
     ;
     let AuthenticationOptional =
         T
-        | where (optional)
         | where EventSchema == 'Authentication'
+            and (optional)
         | invoke ASIM_ProjectAuthenticationOptional()
     ;
     let AuditEvent =
         T
-        | where not(optional)
         | where EventSchema == 'AuditEvent'
+            and not(optional)
         | invoke ASIM_ProjectAuditEventSchema()
     ;
     let AuditEventOptional =
         T
-        | where (optional)
         | where EventSchema == 'AuditEvent'
+            and (optional)
         | invoke ASIM_ProjectAuditEventOptional()
     ;
     let FileEvent =
         T
-        | where not(optional)
         | where EventSchema == 'FileEvent'
+            and not(optional)
         | invoke ASIM_ProjectFileEventSchema()
     ;
     let FileEventOptional =
         T
-        | where (optional)
         | where EventSchema == 'FileEvent'
+            and (optional)
         | invoke ASIM_ProjectFileEventOptional()
     ;
     let ProcessEvent =
         T
-        | where not(optional)
         | where EventSchema == 'ProcessEvent'
+            and not(optional)
         | invoke ASIM_ProjectProcessEventSchema()
     ;
     let ProcessEventOptional =
         T
-        | where (optional)
         | where EventSchema == 'ProcessEvent'
+            and (optional)
         | invoke ASIM_ProjectProcessEventOptional()
     ;
     let RegistryEvent =
         T
-        | where not(optional)
         | where EventSchema == 'RegistryEvent'
+            and not(optional)
         | invoke ASIM_ProjectRegistryEventSchema()
     ;
     let RegistryEventOptional =
         T
-        | where (optional)
         | where EventSchema == 'RegistryEvent'
+            and (optional)
         | invoke ASIM_ProjectRegistryEventOptional()
     ;
     let WebSession =
         T
-        | where not(optional)
         | where EventSchema == 'WebSession'
+            and not(optional)
         | invoke ASIM_ProjectWebSessionSchema()
     ;
     let WebSessionOptional =
         T
-        | where (optional)
         | where EventSchema == 'WebSession'
+            and (optional)
         | invoke ASIM_ProjectWebSessionOptional()
     ;
     let Dns =
         T
-        | where not(optional)
         | where EventSchema == 'Dns'
+            and not(optional)
         | invoke ASIM_ProjectDnsSchema()
     ;
     let DnsOptional =
         T
-        | where (optional)
         | where EventSchema == 'Dns'
+            and (optional)
         | invoke ASIM_ProjectDnsOptional()
     ;
     let UserManagement =
         T
-        | where not(optional)
         | where EventSchema == 'UserManagement'
+            and not(optional)
         | invoke ASIM_ProjectUserManagementSchema()
     ;
     let UserManagementOptional =
         T
-        | where (optional)
         | where EventSchema == 'UserManagement'
+            and (optional)
         | invoke ASIM_ProjectUserManagementOptional()
     ;
     let Dhcp =
         T
-        | where not(optional)
         | where EventSchema == 'Dhcp'
+            and not(optional)
         | invoke ASIM_ProjectDhcpSchema()
     ;
     let DhcpOptional =
         T
-        | where (optional)
         | where EventSchema == 'Dhcp'
+            and (optional)
         | invoke ASIM_ProjectDhcpOptional()
     ;
     union isfuzzy = false
-        NetworkSession
-      , NetworkSessionOptional
-      , Authentication
+        Authentication
       , AuthenticationOptional
       , AuditEvent
       , AuditEventOptional
@@ -154,6 +152,8 @@ resource Workspace_ASIM_ProjectSchema 'Microsoft.OperationalInsights/workspaces/
       , UserManagementOptional
       , Dhcp
       , DhcpOptional
+      , NetworkSession
+      , NetworkSessionOptional
     | project-away _ItemId*'''
     functionParameters: 'T:(EventSchema:string), optional:bool=true'
     functionAlias: 'ASIM_ProjectSchema'
